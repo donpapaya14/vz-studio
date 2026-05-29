@@ -139,7 +139,7 @@ section{position:relative;z-index:2}
 .proj:hover .media .fill{filter:brightness(1.12)}
 .proj .media .glint{position:absolute;top:-12%;bottom:-12%;width:34%;left:-60%;z-index:4;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-18deg)}
 .proj .media .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:italic;font-size:15px;color:rgba(236,238,242,.45);z-index:2}
-.proj .bignum{position:absolute;bottom:12px;left:20px;z-index:5;font-family:"Clash Display",var(--serif);font-weight:700;font-size:70px;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(236,238,242,.26);pointer-events:none}
+.proj .bignum{position:absolute;bottom:12px;left:20px;z-index:5;font-family:"Clash Display",var(--serif);font-weight:700;font-size:68px;line-height:1;color:rgba(236,238,242,.2);-webkit-text-stroke:1.4px rgba(236,238,242,.66);text-shadow:0 1px 14px rgba(0,0,0,.6);pointer-events:none}
 .proj .body{padding:48px 46px;display:flex;flex-direction:column;justify-content:center;background:var(--bg2)}
 .proj .idx{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green2)}
 .proj h3{font-size:clamp(28px,2.8vw,38px);margin:12px 0 14px}
@@ -511,7 +511,7 @@ if(window.gsap&&window.ScrollTrigger){
     contacto:{t:C,c:START},
     gracias:{t:'¡A ti! Cuando quieras lo concretamos. '+C,c:START}
   };
-  function add(html,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html;log.appendChild(d);log.scrollTop=log.scrollHeight;}
+  function add(html,who){const d=document.createElement('div');d.className='msg '+who;if(who==='me'){d.textContent=html;}else{d.innerHTML=html;}log.appendChild(d);log.scrollTop=log.scrollHeight;}
   function typing(){const d=document.createElement('div');d.className='typing';d.id='cbT';d.innerHTML='<i></i><i></i><i></i>';log.appendChild(d);log.scrollTop=log.scrollHeight;}
   function setChips(arr){chips.innerHTML='';(arr||[]).forEach(c=>{const b=document.createElement('button');b.textContent=c[0];b.onclick=()=>{add(c[0],'me');setChips([]);reply(c[1]);};chips.appendChild(b);});}
   function reply(i){const k=KB[i]||KB.contacto;typing();setTimeout(()=>{const e=document.getElementById('cbT');if(e)e.remove();add(k.t,'bot');setChips(k.c);},560);}
