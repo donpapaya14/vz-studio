@@ -193,10 +193,20 @@ section{position:relative;z-index:2}
 @media(max-width:760px){.about-row{grid-template-columns:1fr;gap:24px}.portrait{max-width:230px}}
 
 .contact{padding:170px 0;text-align:center}
-.contact h2{font-size:clamp(42px,6.2vw,92px);max-width:15ch;margin:18px auto 0}
-.contact .clinks{margin-top:46px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.contact h2{font-size:clamp(34px,6.2vw,92px);max-width:15ch;margin:18px auto 0;overflow-wrap:break-word;hyphens:auto}
+.contact .clinks{margin-top:46px;display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
 .footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:42px var(--pad);background:rgba(18,20,25,.9)}
 .frow{max-width:var(--w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--mid);letter-spacing:.03em}
+.frow span{min-width:0;overflow-wrap:anywhere}
+@media(max-width:600px){
+  .contact{padding:100px 0}
+  .contact h2{font-size:clamp(30px,8.4vw,92px);max-width:18ch}
+  .contact h2 br{display:none}
+  .contact .clinks{flex-direction:column;gap:12px}
+  .contact .clinks .btn{width:100%;max-width:340px;text-align:center}
+  .frow{flex-direction:column;justify-content:center;text-align:center;gap:10px}
+  .flegal{margin-top:10px;padding-top:14px}
+}
 
 /* chatbot */
 .cbot{position:fixed;right:22px;bottom:22px;z-index:60;font-family:var(--sans)}
@@ -245,6 +255,34 @@ section{position:relative;z-index:2}
   .cursor{position:fixed;top:0;left:0;width:30px;height:30px;border:1.6px solid var(--green2);border-radius:50%;pointer-events:none;z-index:9999;will-change:transform;transition:width .25s,height .25s,background .25s,border-color .25s}
   .cursor.big{width:60px;height:60px;background:rgba(var(--rgb2),.14);border-color:rgba(var(--rgb2),.5)}
   .cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;border-radius:50%;background:var(--green2);pointer-events:none;z-index:9999;will-change:transform}
+}
+
+/* ===== fixes responsive movil ===== */
+.cbot-form input{font-size:16px}/* evita zoom iOS al enfocar */
+.cbot-head .x{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+@media(max-width:640px){
+  .redo,.work,.svc,.incl,.about{padding:90px 0}
+}
+@media(max-width:600px){
+  /* zona inferior: chatbot, barra cookies y footer no se pisan */
+  .cbot{right:var(--pad);bottom:18px;z-index:70}
+  body.ck-visible .cbot{bottom:108px}
+  body.ck-visible .footer{padding-bottom:150px}
+  body.cbot-open .ckbar{transform:translateY(170%)}
+  .cbot-head .x{width:44px;height:44px}
+}
+@media(max-width:560px){
+  .proj .body{padding:30px 22px}
+  .proj .bignum{font-size:48px;left:14px;bottom:10px}
+  .icard{padding:32px var(--pad)}
+  .cbot-chips{gap:10px;padding:0 16px 12px}
+  .cbot-chips button{min-height:40px;padding:10px 14px;font-size:13px}
+}
+@media(max-width:480px){
+  .about .facts{grid-template-columns:1fr 1fr}
+  .about .facts .f:nth-child(2n){border-right:0}
+  .about .facts .f:nth-child(odd){border-right:1px solid var(--line)}
+  .hero h1{font-size:clamp(38px,11vw,54px);overflow-wrap:break-word;hyphens:auto}
 }
 </style>
 </head>
@@ -490,7 +528,7 @@ if(window.gsap&&window.ScrollTrigger){
 })();
 
 /* ===== aviso cookies ===== */
-(function(){var b=document.getElementById('ckbar');if(!b)return;function show(){b.classList.add('show');}try{if(!localStorage.getItem('vz-ck'))setTimeout(show,900);}catch(e){setTimeout(show,900);}window.ckOk=function(){b.classList.remove('show');try{localStorage.setItem('vz-ck','1');}catch(e){}};})();
+(function(){var b=document.getElementById('ckbar');if(!b)return;function show(){b.classList.add('show');document.body.classList.add('ck-visible');}try{if(!localStorage.getItem('vz-ck'))setTimeout(show,900);}catch(e){setTimeout(show,900);}window.ckOk=function(){b.classList.remove('show');document.body.classList.remove('ck-visible');try{localStorage.setItem('vz-ck','1');}catch(e){}};})();
 
 /* ===== chatbot cualificador (scripted, base ampliada, cero coste) ===== */
 (function(){
@@ -542,7 +580,7 @@ if(window.gsap&&window.ScrollTrigger){
     if(/(ia|inteligencia|gpt|llm)/.test(x))return'agentes';
     return'que';
   }
-  window.cbToggle=function(open){const c=document.getElementById('cbot');c.classList.toggle('open',open);
+  window.cbToggle=function(open){const c=document.getElementById('cbot');c.classList.toggle('open',open);document.body.classList.toggle('cbot-open',open);
     if(open&&!greeted){greeted=true;typing();setTimeout(()=>{const e=document.getElementById('cbT');if(e)e.remove();add('Hola 👋 Soy el asistente de Vladys. Te ayudo con webs, agentes de IA, automatización… ¿qué necesitas?','bot');setChips(START);},500);}};
   form.addEventListener('submit',e=>{e.preventDefault();const v=input.value.trim();if(!v)return;add(v,'me');input.value='';setChips([]);reply(detect(v.toLowerCase()));});
 })();
