@@ -32,6 +32,7 @@
   --pad:clamp(24px,5vw,72px); --w:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+picture{display:contents}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--green2);outline-offset:3px;border-radius:3px}
 html.lenis,html.lenis body{height:auto}
@@ -321,8 +322,8 @@ section{position:relative;z-index:2}
         </div>
       </div>
       <div class="beforeafter">
-        <figure class="ba"><img src="assets/loyal-old.jpg" alt="Loyal Capital — web antigua en WordPress" loading="lazy"><figcaption><span class="bal antes">Antes · WordPress</span></figcaption></figure>
-        <figure class="ba"><img src="assets/work-loyal.jpg" alt="Loyal Capital — rediseño actual" loading="lazy"><figcaption><span class="bal desp">Después · rediseño</span></figcaption></figure>
+        <figure class="ba"><picture><source srcset="assets/loyal-old.webp" type="image/webp"><img src="assets/loyal-old.jpg" alt="Loyal Capital — web antigua en WordPress" loading="lazy"></picture><figcaption><span class="bal antes">Antes · WordPress</span></figcaption></figure>
+        <figure class="ba"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img src="assets/work-loyal.jpg" alt="Loyal Capital — rediseño actual" loading="lazy"></picture><figcaption><span class="bal desp">Después · rediseño</span></figcaption></figure>
       </div>
     </div>
   </div>
@@ -332,11 +333,11 @@ section{position:relative;z-index:2}
   <div class="wrap">
     <div class="shead"><span class="sn">02 — Trabajo</span><h2>Proyectos reales donde el <span class="em-green">criterio</span> se nota.</h2><p class="rt">En producción: finanzas, marketing, sistemas y producto.</p></div>
     <article class="proj">
-      <div class="media browser"><div class="bbar"><i></i><i></i><i></i><span class="burl">loyalcapitaladvisors.com</span></div><div class="bview"><img class="shot" src="assets/work-loyal.jpg" alt="Loyal Capital Advisors — web boutique financiera" loading="lazy"></div><span class="bignum">01</span></div>
+      <div class="media browser"><div class="bbar"><i></i><i></i><i></i><span class="burl">loyalcapitaladvisors.com</span></div><div class="bview"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img class="shot" src="assets/work-loyal.jpg" alt="Loyal Capital Advisors — web boutique financiera" loading="lazy"></picture></div><span class="bignum">01</span></div>
       <div class="body"><span class="idx ln">01 — Corporate Finance · Web bilingüe</span><h3 class="ln">Loyal Capital Advisors</h3><p class="ln">Web editorial de lujo discreto para una firma boutique de banca de inversión en Madrid, con sistema bilingüe ES/EN propio y mapa de cobertura internacional animado en SVG. Estética private banking que transmite confidencialidad y criterio.</p><div class="ptags ln"><span>Web a medida</span><span>Bilingüe i18n</span><span>SVG animado</span><span>Editorial</span></div></div>
     </article>
     <article class="proj">
-      <div class="media browser"><div class="bbar"><i></i><i></i><i></i><span class="burl">aionmkt.com</span></div><div class="bview"><img class="shot" src="assets/work-aion.jpg" alt="AION Marketing — web de agencia" loading="lazy"></div><span class="bignum">02</span></div>
+      <div class="media browser"><div class="bbar"><i></i><i></i><i></i><span class="burl">aionmkt.com</span></div><div class="bview"><picture><source srcset="assets/work-aion.webp" type="image/webp"><img class="shot" src="assets/work-aion.jpg" alt="AION Marketing — web de agencia" loading="lazy"></picture></div><span class="bignum">02</span></div>
       <div class="body"><span class="idx ln">02 — Agencia digital · Plataforma web</span><h3 class="ln">AION Marketing</h3><p class="ln">Plataforma multipágina premium en Next.js para una agencia que une marketing, paid media e IA en un mismo sistema. Dark mode con gradientes estilo Apple, casos de éxito con métricas reales y agentes conversacionales como producto estrella.</p><div class="ptags ln"><span>Next.js</span><span>React</span><span>Dark mode</span><span>Casos con métricas</span></div></div>
     </article>
     <article class="proj">
@@ -344,7 +345,7 @@ section{position:relative;z-index:2}
       <div class="body"><span class="idx ln">03 — Sistemas autónomos · LLM</span><h3 class="ln">Automatizaciones &amp; IA con n8n</h3><p class="ln">Pipelines que trabajan solos: chatbots de WhatsApp que cualifican y agendan, sincronización Postgres ↔ Notion, reporting de Meta Ads y distribución de contenido multicanal orquestados con LLMs. Menos tareas repetitivas, más decisiones con datos.</p><div class="ptags ln"><span>n8n</span><span>Agentes IA / LLM</span><span>WhatsApp &amp; Meta Ads</span><span>Postgres · Notion</span></div></div>
     </article>
     <article class="proj">
-      <div class="media app"><div class="fill"></div><div class="phone back"><img src="assets/app-historial.jpg" alt="App Gestor de Citas — historial" loading="lazy"></div><div class="phone front"><img src="assets/app-inicio.jpg" alt="App Gestor de Citas — inicio" loading="lazy"></div><span class="bignum">04</span></div>
+      <div class="media app"><div class="fill"></div><div class="phone back"><picture><source srcset="assets/app-historial.webp" type="image/webp"><img src="assets/app-historial.jpg" alt="App Gestor de Citas — historial" loading="lazy"></picture></div><div class="phone front"><picture><source srcset="assets/app-inicio.webp" type="image/webp"><img src="assets/app-inicio.jpg" alt="App Gestor de Citas — inicio" loading="lazy"></picture></div><span class="bignum">04</span></div>
       <div class="body"><span class="idx ln">04 — App multiplataforma · Flutter</span><h3 class="ln">App Gestor de Citas</h3><p class="ln">App de reservas para iOS, Android y web con paneles de cliente y administrador, pagos Stripe, facturación en PDF y notificaciones push en tiempo real. Un sistema completo de gestión de citas para cualquier negocio de servicios.</p><div class="ptags ln"><span>Flutter</span><span>Firebase</span><span>Stripe</span><span>Multiplataforma</span></div></div>
     </article>
   </div>
@@ -392,7 +393,7 @@ section{position:relative;z-index:2}
   <div class="wrap">
     <div class="shead"><span class="sn">05 — Estudio</span><h2>El estudio</h2><p class="rt">Pocos clientes, mucho criterio.</p></div>
     <div class="about-row">
-      <div class="portrait"><img src="assets/vladys-foto.jpg" alt="Vladys Z"></div>
+      <div class="portrait"><picture><source srcset="assets/vladys-foto.webp" type="image/webp"><img src="assets/vladys-foto.jpg" alt="Vladys Z"></picture></div>
       <div class="atext">
         <h2>Soy Vladys. Diseño y construyo <span class="em-green">como si fuera mío.</span></h2>
         <p>Desarrollador multiplataforma e IA. Diseño y desarrollo webs premium, monto automatizaciones que eliminan trabajo repetitivo y meto IA donde de verdad mueve la aguja — y dejo cada proyecto rápido, optimizado para SEO y blindado antes de publicar.</p>
