@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--
+  VZ Studio — Banner de cabecera LinkedIn (1584 x 396, ratio 4:1)
+  ──────────────────────────────────────────────────────────────
+  CÓMO CAPTURAR:
+  · Chrome headless:
+      chrome --headless --screenshot=banner.png --window-size=1584,396 --default-background-color=00000000 --hide-scrollbars linkedin-banner.html
+    (en macOS el binario suele ser:
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --screenshot=banner.png --window-size=1584,396 --hide-scrollbars file:///ruta/linkedin-banner.html)
+  · Manual: abre en navegador a 100% zoom y captura SOLO el div .banner (1584x396).
+  · Zona segura: en móvil LinkedIn recorta ~20% por cada lado y la foto de perfil
+    (círculo) tapa la esquina INFERIOR IZQUIERDA. Todo el contenido vive en el
+    60% central-derecha; la franja inferior-izquierda queda intencionadamente vacía.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1584, initial-scale=1">
+<title>VZ Studio — Banner LinkedIn</title>
+
+<!-- EB Garamond (Google Fonts) + General Sans (Fontshare) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:        #14161b;
+    --accent:    #E8E3D8;  /* hueso */
+    --bright:    #F1EDE4;  /* brillo */
+    --on-accent: #16140f;
+    --line:      rgba(232,227,216,.10);
+    --line-soft: rgba(232,227,216,.045);
+    --muted:     rgba(232,227,216,.58);
+    --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+    --sans:  "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html,body{
+    width:1584px;
+    height:396px;
+    background:#0d0e12;
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .banner{
+    position:relative;
+    width:1584px;
+    height:396px;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 140% at 78% 30%, #1b1e25 0%, #14161b 46%, #101218 100%);
+    color:var(--accent);
+    font-family:var(--sans);
+  }
+
+  /* ── Textura: grid fino grafito (CSS puro) ─────────────────── */
+  .banner::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:52px 52px;
+    -webkit-mask-image:radial-gradient(120% 120% at 70% 40%, #000 38%, transparent 86%);
+            mask-image:radial-gradient(120% 120% at 70% 40%, #000 38%, transparent 86%);
+    opacity:.9;
+    pointer-events:none;
+  }
+
+  /* ── Líneas verticales finas (acento editorial derecha) ───── */
+  .rules{
+    position:absolute; top:0; bottom:0; right:0;
+    width:520px;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg, transparent 0, var(--line) 1px, transparent 2px) 0 0/130px 100%;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 60%);
+            mask-image:linear-gradient(90deg, transparent, #000 60%);
+    opacity:.5;
+  }
+
+  /* halo cálido tenue sup-derecha */
+  .glow{
+    position:absolute;
+    width:760px; height:760px;
+    right:-180px; top:-340px;
+    background:radial-gradient(circle, rgba(241,237,228,.06) 0%, transparent 62%);
+    pointer-events:none;
+  }
+
+  /* ── ZONA SEGURA: contenido en el 60% central-derecha ─────── */
+  .content{
+    position:absolute;
+    left:430px;            /* libre la franja izquierda (recorte + foto) */
+    right:118px;
+    top:0; bottom:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:22px;
+  }
+
+  /* ── Logo VZ monoline + dominio ───────────────────────────── */
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .brand svg{ display:block; }
+  .brand .wordmark{
+    font-family:var(--serif);
+    font-size:25px;
+    letter-spacing:.30em;
+    text-transform:uppercase;
+    color:var(--bright);
+  }
+  .brand .sep{
+    width:1px; height:26px;
+    background:var(--line);
+  }
+  .brand .domain{
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:18px;
+    letter-spacing:.04em;
+    color:var(--muted);
+  }
+
+  /* ── Claim (jerarquía fuerte) ─────────────────────────────── */
+  .claim{
+    font-family:var(--serif);
+    font-weight:500;
+    color:var(--bright);
+    font-size:55px;
+    line-height:1.06;
+    letter-spacing:-.005em;
+    max-width:880px;
+  }
+  .claim .old{
+    color:var(--muted);
+    font-style:italic;
+    font-weight:400;
+    position:relative;
+    white-space:nowrap;
+  }
+  /* tachado fino sobre "anticuadas" */
+  .claim .old::after{
+    content:"";
+    position:absolute;
+    left:-2px; right:-2px;
+    top:54%;
+    height:1.5px;
+    background:var(--muted);
+    transform:rotate(-1.5deg);
+    opacity:.85;
+  }
+  .claim .arrow{
+    color:var(--accent);
+    font-style:normal;
+    font-family:var(--sans);
+    font-weight:400;
+    padding:0 .12em;
+  }
+  .claim .sell{
+    color:var(--bright);
+    position:relative;
+    white-space:nowrap;
+  }
+  .claim .sell::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-7px;
+    height:2px;
+    background:linear-gradient(90deg, var(--accent), rgba(232,227,216,0));
+  }
+
+  .tagline{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:21px;
+    color:var(--muted);
+    letter-spacing:.01em;
+    margin-top:-4px;
+  }
+
+  /* ── Micro-etiquetas line-art: Rediseño · SEO · Seguridad ─── */
+  .chips{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-top:6px;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 16px 9px 14px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:rgba(232,227,216,.018);
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:15.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .chip svg{ display:block; stroke:var(--accent); }
+  .chip .dot{
+    width:4px; height:4px; border-radius:50%;
+    background:var(--muted);
+  }
+  .chips .divider{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--line);
+  }
+</style>
+</head>
+
+<body>
+  <div class="banner" role="img"
+       aria-label="VZ Studio — vzstudio.dev. Webs anticuadas a webs que venden. Rediseño, SEO y Seguridad.">
+
+    <div class="glow"></div>
+    <div class="rules"></div>
+
+    <div class="content">
+
+      <!-- Marca: logo VZ monoline + dominio -->
+      <div class="brand">
+        <!-- Logo VZ monoline: V grande + z pequeña, trazo hueso -->
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+          <!-- V grande -->
+          <path d="M9 12 L25 44 L41 12"
+                stroke="#F1EDE4" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- z pequeña, anclada abajo-derecha -->
+          <path d="M37 32 H49 L37 46 H49"
+                stroke="#E8E3D8" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="wordmark">VZ&nbsp;Studio</span>
+        <span class="sep"></span>
+        <span class="domain">vzstudio.dev</span>
+      </div>
+
+      <!-- Claim editorial -->
+      <h1 class="claim">
+        Webs <span class="old">anticuadas</span>
+        <span class="arrow">→</span>
+        <span class="sell">webs que venden</span>
+      </h1>
+
+      <p class="tagline">Construyo sistemas que trabajan por ti.</p>
+
+      <!-- Micro-etiquetas line-art -->
+      <div class="chips" aria-hidden="true">
+        <span class="chip">
+          <!-- Rediseño: layout / lienzo -->
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.7">
+            <rect x="3.5" y="4.5" width="17" height="15" rx="2"/>
+            <path d="M3.5 9.5 H20.5 M9 9.5 V19.5"/>
+          </svg>
+          Rediseño
+        </span>
+        <span class="divider"></span>
+        <span class="chip">
+          <!-- SEO: lupa con tendencia -->
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.7">
+            <circle cx="10.5" cy="10.5" r="6.5"/>
+            <path d="M15.4 15.4 L20.5 20.5"/>
+            <path d="M8 11.5 L10 9.5 L11.5 11 L13.5 8.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          SEO
+        </span>
+        <span class="divider"></span>
+        <span class="chip">
+          <!-- Seguridad: escudo con check -->
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.7">
+            <path d="M12 3 L19 6 V11 C19 15.5 16 19 12 21 C8 19 5 15.5 5 11 V6 Z"
+                  stroke-linejoin="round"/>
+            <path d="M9 11.5 L11.2 13.8 L15 9.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Seguridad
+        </span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

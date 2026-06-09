@@ -14,582 +14,305 @@
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://vzstudio.dev/assets/og.jpg">
-<meta name="theme-color" content="#14161b">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 124'%3E%3Crect width='120' height='124' rx='26' fill='%2314161b'/%3E%3Cpath d='M22 32 L58 96 L94 32' stroke='%23E8E3D8' stroke-width='8' fill='none'/%3E%3Cpath d='M72 72 L98 72 L74 92 L98 92' stroke='%23E8E3D8' stroke-width='6.5' fill='none'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=clash-display@600,700&display=swap" rel="stylesheet">
-<script src="vendor/gsap.min.js"></script>
-<script src="vendor/ScrollTrigger.min.js"></script>
-<script src="vendor/SplitText.min.js"></script>
-<script src="vendor/lenis.min.js"></script><style>
-:root{
-  --bg:#14161b; --bg2:#1c1f26; --panel:rgba(22,25,31,.70); --ink:#eceef2; --ink2:#a7adb8; --mid:#7f8693;
-  --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.22);
-  --green:#E8E3D8; --green2:#F1EDE4; --green-deep:#3a3631; --rgb:232,227,216; --rgb2:241,237,228; --on:#16140f;
-  --serif:"EB Garamond",Georgia,serif; --sans:"General Sans","Inter",-apple-system,system-ui,sans-serif;
-  --pad:clamp(24px,5vw,72px); --w:1180px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-picture{display:contents}
-a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--green2);outline-offset:3px;border-radius:3px}
-html.lenis,html.lenis body{height:auto}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
-.lenis.lenis-stopped{overflow:hidden}
-html,body{overflow-x:hidden;max-width:100vw}
-body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.62;-webkit-font-smoothing:antialiased;font-feature-settings:"liga" 1,"kern" 1}
-h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.01em;line-height:1.03}
-em{font-style:italic}
-.em-green{font-style:italic;color:var(--green2)}
-.eyebrow{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--green2);display:inline-flex;align-items:center;gap:12px}
-.eyebrow::before{content:"";width:32px;height:2px;background:var(--green2)}
-
-#vbg{position:fixed;inset:0;z-index:0}
-.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(85% 75% at 26% 40%,rgba(20,22,27,.42),rgba(20,22,27,.82))}
-.prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:50;background:linear-gradient(90deg,var(--green),var(--green2));box-shadow:0 0 12px rgba(var(--rgb2),.55)}
-
-.nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad);transition:background .3s,box-shadow .3s}
-.nav.scrolled{background:rgba(20,22,27,.8);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
-.brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
-.brand svg{width:30px;height:30px;color:var(--ink)}
-.brand .bn{font-family:var(--serif);font-weight:700;font-size:20px;letter-spacing:.14em;text-transform:uppercase}
-.nlinks{display:flex;gap:28px;align-items:center}
-.nlinks a{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.02em;position:relative;color:var(--ink2)}
-.nlinks a:hover{color:var(--ink)}
-.nlinks a:not(.cta)::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--green2);transition:right .35s}
-.nlinks a:not(.cta):hover::after{right:0}
-.cta{color:var(--ink)!important;border:1.5px solid var(--line2);padding:11px 20px;border-radius:999px;transition:.25s}
-.cta:hover{background:var(--green);border-color:var(--green);color:var(--on)!important}
-@media(max-width:780px){.nlinks a:not(.cta){display:none}}
-
-.btn{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.02em;padding:16px 32px;cursor:pointer;border-radius:999px;transition:.28s cubic-bezier(.2,.7,.2,1);display:inline-block;will-change:transform;border:1.5px solid transparent}
-.btn-solid{background:var(--green);color:var(--on)}.btn-solid:hover{box-shadow:0 10px 34px rgba(var(--rgb),.5);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line2)}.btn-ghost:hover{border-color:var(--ink);background:rgba(255,255,255,.05)}
-
-section{position:relative;z-index:2}
-.wrap{max-width:var(--w);margin:0 auto;padding:0 var(--pad)}
-.opaque{background:var(--panel);backdrop-filter:blur(7px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px var(--pad) 80px;position:relative;z-index:2}
-.hero .inner{max-width:var(--w);margin:0 auto;width:100%}
-.hero h1{font-size:clamp(54px,8.4vw,110px);max-width:14ch;margin-top:22px}
-.hero h1 .l2{display:block;color:var(--ink2)}
-.hero h1 .l3{display:block;font-style:italic;color:var(--green2)}
-.hero h1 .sline{overflow:hidden;padding-bottom:.08em}
-.hero .sub{margin-top:28px;max-width:50ch;font-size:23px;color:var(--ink2)}
-.hero .cta-row{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
-.hero .tags{margin-top:48px;display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:840px;flex-wrap:wrap}
-.hero .tags span{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);padding:16px 22px;border-right:1px solid var(--line)}
-
-.shead{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:60px}
-.shead .sn{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green2)}
-.shead h2{font-size:clamp(32px,4vw,54px)}
-.shead .rt{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--mid);text-align:right;max-width:32ch}
-@media(max-width:760px){.shead{grid-template-columns:1fr}.shead .rt{text-align:left}}
-
-.redo{padding:150px 0}
-.redo .grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
-@media(max-width:820px){.redo .grid{grid-template-columns:1fr;gap:32px;align-items:start}}
-.redo h2{font-size:clamp(34px,4.6vw,62px);max-width:14ch}
-.redo p{margin-top:24px;font-size:20px;line-height:1.66;color:var(--ink2);max-width:48ch}
-.redo .pts{margin-top:30px;display:flex;flex-direction:column;gap:14px}
-.redo .pt{display:flex;gap:14px;align-items:flex-start;font-size:18px;color:var(--ink2)}
-.redo .pt b{color:var(--ink);font-weight:700}
-.redo .pt .ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--green2);color:var(--green2);display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:2px}
-.beforeafter{display:grid;gap:14px}
-.ba{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:var(--bg2);margin:0}
-.ba img{width:100%;height:100%;object-fit:cover;object-position:top center}
-.ba figcaption{position:absolute;top:10px;left:10px}
-.bal{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px;display:inline-block}
-.bal.antes{background:rgba(20,22,27,.72);color:var(--ink2);border:1px solid var(--line);backdrop-filter:blur(6px)}
-.bal.desp{background:var(--green);color:var(--on)}
-
-.work{padding:150px 0}
-.proj{position:relative;display:grid;grid-template-columns:1.15fr 1fr;gap:0;border:1px solid var(--line);margin-bottom:26px;overflow:hidden;background:var(--bg2)}
-.proj:nth-child(even){grid-template-columns:1fr 1.15fr}
-.proj:nth-child(even) .media{order:2;border-right:0;border-left:1px solid var(--line)}
-.proj:nth-child(even) .body{order:1}
-.proj .media{position:relative;min-height:380px;overflow:hidden;border-right:1px solid var(--line)}
-.proj .media .fill{position:absolute;inset:-9% 0;transition:filter .5s;will-change:transform}
-/* captura en marco de navegador */
-.proj .media.browser{background:#0e1014}
-.bbar{position:absolute;top:0;left:0;right:0;height:34px;z-index:3;display:flex;align-items:center;gap:7px;padding:0 14px;background:#1b1e24;border-bottom:1px solid var(--line)}
-.bbar i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);flex:0 0 auto}
-.bbar .burl{margin-left:8px;font-family:var(--sans);font-size:11px;color:var(--mid);background:#14161b;border:1px solid var(--line);border-radius:7px;padding:4px 12px;flex:1;max-width:62%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bview{position:absolute;left:0;right:0;top:34px;bottom:0;overflow:hidden}
-.bview .shot{position:absolute;left:0;top:-6%;width:100%;height:112%;object-fit:cover;object-position:top center;filter:saturate(.98) contrast(1.02);will-change:transform}
-.proj:hover .bview .shot{filter:saturate(1.05) contrast(1.05)}
-/* app: maqueta de moviles */
-.proj .media.app{display:flex;align-items:center;justify-content:center;gap:16px}
-.phone{position:relative;width:38%;max-width:148px;aspect-ratio:1080/2340;border-radius:24px;border:5px solid #2a2e36;background:#0b0d10;overflow:hidden;box-shadow:0 26px 60px rgba(0,0,0,.6)}
-.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
-.phone.back{transform:translateY(16px) scale(.9) rotate(-5deg);opacity:.85;z-index:1}
-.phone.front{transform:rotate(2deg);z-index:2}
-/* n8n: diagrama de flujo real */
-.proj .media.flow-media{display:flex;align-items:center;justify-content:center;padding:24px}
-.flow{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:300px}
-.flow .ftag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green2);margin-bottom:4px}
-.fnode{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--ink);background:rgba(28,31,38,.92);border:1px solid var(--line2);border-radius:10px;padding:9px 14px;text-align:center;width:100%}
-.fnode.ai{border-color:var(--green2);color:var(--green2)}
-.fnode.trigger{border-color:rgba(255,255,255,.4)}
-.farrow{color:var(--mid);font-size:13px;line-height:1}
-.fbranch{display:flex;gap:10px;width:100%}
-.fnode.sm{font-size:11px;padding:8px 10px}
-.proj:nth-child(1) .media .fill{background:linear-gradient(135deg,#23262d,#2c3038 55%,#1b1e24)}
-.proj:nth-child(2) .media .fill{background:linear-gradient(135deg,#202329,#2a2e36 55%,#181b21)}
-.proj:nth-child(3) .media .fill{background:linear-gradient(135deg,#0e3d29,#15543a 60%,#0c2c20)}
-.proj:nth-child(4) .media .fill{background:linear-gradient(135deg,#26292f,#30343c 55%,#1d2026)}
-.proj:hover .media .fill{filter:brightness(1.12)}
-.proj .media .glint{position:absolute;top:-12%;bottom:-12%;width:34%;left:-60%;z-index:4;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-18deg)}
-.proj .media .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:italic;font-size:15px;color:rgba(236,238,242,.45);z-index:2}
-.proj .bignum{position:absolute;bottom:12px;left:20px;z-index:5;font-family:"Clash Display",var(--serif);font-weight:700;font-size:68px;line-height:1;color:rgba(236,238,242,.2);-webkit-text-stroke:1.4px rgba(236,238,242,.66);text-shadow:0 1px 14px rgba(0,0,0,.6);pointer-events:none}
-.proj .body{padding:48px 46px;display:flex;flex-direction:column;justify-content:center;background:var(--bg2)}
-.proj .idx{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green2)}
-.proj h3{font-size:clamp(28px,2.8vw,38px);margin:12px 0 14px}
-.proj p{font-size:18px;line-height:1.66;color:var(--ink2);max-width:46ch}
-.proj .ptags{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
-.proj .ptags span{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
-@media(max-width:820px){.proj,.proj:nth-child(even){grid-template-columns:1fr}.proj .media,.proj:nth-child(even) .media{order:0;border-right:0;border-left:0;border-bottom:1px solid var(--line);min-height:240px}.proj .body{order:0}}
-
-.svc{padding:150px 0}
-.svc-row{display:grid;grid-template-columns:60px 1.1fr 2fr auto;gap:28px;align-items:center;padding:32px 0;border-top:1px solid var(--line);transition:background .3s}
-.svc-row:last-child{border-bottom:1px solid var(--line)}
-.svc-row:hover{background:rgba(var(--rgb2),.07)}
-.svc-row .n{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--green2)}
-.svc-row h3{font-size:clamp(23px,2.5vw,32px)}
-.svc-row p{font-size:17px;color:var(--ink2);max-width:48ch}
-.svc-row .ar{font-size:24px;color:var(--mid)}
-@media(max-width:760px){.svc-row{grid-template-columns:40px 1fr;gap:10px}.svc-row p,.svc-row .ar{grid-column:1/-1}}
-
-.incl{padding:150px 0}
-.incl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line)}
-.icard{padding:40px 32px;border-right:1px solid var(--line);position:relative}
-.icard:last-child{border-right:0}
-.icard.gift{background:linear-gradient(180deg,rgba(var(--rgb),.16),transparent)}
-.icard .ic{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--green2);color:var(--green2);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
-.icard .ic svg{width:24px;height:24px}
-.icard h3{font-size:25px;margin-bottom:12px}
-.icard p{font-size:16px;line-height:1.6;color:var(--ink2)}
-.icard .badge{position:absolute;top:18px;right:18px;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--on);background:var(--green);border-radius:999px;padding:5px 10px}
-@media(max-width:920px){.incl-grid{grid-template-columns:1fr 1fr}.icard{border-bottom:1px solid var(--line)}.icard:nth-child(odd){border-right:1px solid var(--line)}.icard:nth-child(even){border-right:0}}
-@media(max-width:560px){.incl-grid{grid-template-columns:1fr}.icard{border-right:0!important}}
-
-.about{padding:150px 0}
-.about-row{display:grid;grid-template-columns:clamp(140px,17vw,200px) 1fr;gap:clamp(26px,4vw,52px);align-items:start}
-.portrait{position:relative;width:100%;aspect-ratio:3/4;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 44px rgba(0,0,0,.4)}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 8%;filter:grayscale(.1) contrast(1.05);will-change:transform}
-.atext h2{font-size:clamp(28px,3.4vw,46px);max-width:18ch;margin-bottom:6px}
-.about .atext p{margin-top:18px;font-size:18px;line-height:1.7;color:var(--ink2);max-width:60ch}
-.about .atext p b{color:var(--ink)}
-.about .facts{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
-.about .facts .f{padding:18px 16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
-.about .facts .f:last-child{border-right:0}
-.about .facts .n{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--green2)}
-.about .facts .k{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-top:6px}
-@media(max-width:760px){.about-row{grid-template-columns:1fr;gap:24px}.portrait{max-width:230px}}
-
-.contact{padding:170px 0;text-align:center}
-.contact h2{font-size:clamp(34px,6.2vw,92px);max-width:15ch;margin:18px auto 0;overflow-wrap:break-word;hyphens:auto}
-.contact .clinks{margin-top:46px;display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
-.footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:42px var(--pad);background:rgba(18,20,25,.9)}
-.frow{max-width:var(--w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--mid);letter-spacing:.03em}
-.frow span{min-width:0;overflow-wrap:anywhere}
-@media(max-width:600px){
-  .contact{padding:100px 0}
-  .contact h2{font-size:clamp(30px,8.4vw,92px);max-width:18ch}
-  .contact h2 br{display:none}
-  .contact .clinks{flex-direction:column;gap:12px}
-  .contact .clinks .btn{width:100%;max-width:340px;text-align:center}
-  .frow{flex-direction:column;justify-content:center;text-align:center;gap:10px}
-  .flegal{margin-top:10px;padding-top:14px}
-}
-
-/* chatbot */
-.cbot{position:fixed;right:22px;bottom:22px;z-index:60;font-family:var(--sans)}
-.cbot-launch{display:flex;align-items:center;gap:10px;background:var(--green);color:var(--on);border:0;cursor:pointer;padding:12px 18px 12px 13px;border-radius:999px;box-shadow:0 14px 40px rgba(0,0,0,.45);font-size:13px;font-weight:700;transition:.25s}
-.cbot-launch:hover{box-shadow:0 16px 48px rgba(var(--rgb),.6);transform:translateY(-2px)}
-.cbot-launch .av{position:relative;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:var(--on)}
-.cbot-launch .av svg{width:17px;height:17px}
-.cbot-launch .dot{position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;border-radius:50%;background:#7CFFB0;border:2px solid var(--green)}
-.cbot-panel{position:absolute;right:0;bottom:62px;width:min(360px,92vw);height:min(520px,72vh);background:rgba(26,29,35,.98);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden}
-.cbot.open .cbot-panel{display:flex;animation:cbup .3s cubic-bezier(.2,.7,.2,1)}
-.cbot.open .cbot-launch{display:none}
-@keyframes cbup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.cbot-head{display:flex;align-items:center;gap:12px;padding:15px 18px;background:#101216;border-bottom:1px solid var(--line)}
-.cbot-head .av{width:34px;height:34px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:var(--on)}
-.cbot-head .av svg{width:22px;height:22px}
-.cbot-head .t b{font-family:var(--serif);font-weight:700;font-size:16px;display:block;line-height:1.1;color:var(--ink)}
-.cbot-head .t span{font-size:11px;letter-spacing:.03em;color:var(--green2)}
-.cbot-head .x{margin-left:auto;background:transparent;border:0;color:var(--ink2);font-size:22px;cursor:pointer;line-height:1}
-.cbot-log{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:84%;padding:11px 14px;border-radius:15px;font-size:15px;line-height:1.5;font-family:var(--serif)}
-.msg.bot{align-self:flex-start;background:#22252c;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
-.msg.me{align-self:flex-end;background:var(--green);color:var(--on);border-bottom-right-radius:5px}
-.typing{align-self:flex-start;display:flex;gap:4px;padding:13px 15px;background:#22252c;border:1px solid var(--line);border-radius:14px}
-.typing i{width:6px;height:6px;border-radius:50%;background:var(--mid);animation:tp 1s infinite}
-.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
-@keyframes tp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
-.cbot-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 10px}
-.cbot-chips button{font-size:12px;font-weight:600;color:var(--ink);background:transparent;border:1px solid var(--line2);border-radius:999px;padding:8px 13px;cursor:pointer;transition:.2s}
-.cbot-chips button:hover{background:var(--green);color:var(--on);border-color:var(--green)}
-.cbot-form{display:flex;gap:8px;padding:13px 16px;border-top:1px solid var(--line)}
-.cbot-form input{flex:1;font-size:13px;padding:11px 15px;border:1px solid var(--line2);border-radius:999px;background:#15171c;color:var(--ink);outline:none}
-.cbot-form input:focus{border-color:var(--green2)}
-.cbot-form button{background:var(--green);border:0;width:42px;height:42px;border-radius:50%;cursor:pointer;color:var(--on);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-/* cursor firma (custom) */
-.ckbar{position:fixed;left:16px;right:16px;bottom:16px;z-index:65;max-width:560px;margin:0 auto;background:rgba(20,22,27,.95);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:15px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;box-shadow:0 20px 50px rgba(0,0,0,.5);font-family:var(--sans);font-size:13px;color:var(--ink2);transform:translateY(170%);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.ckbar.show{transform:translateY(0)}
-.ckbar p{flex:1;min-width:200px;line-height:1.5;margin:0}
-.ckbar p b{color:var(--ink)}
-.ckbar a{color:var(--green2);text-decoration:underline}
-.ckbar button{font-family:var(--sans);font-size:13px;font-weight:700;padding:10px 20px;border-radius:999px;border:0;background:var(--green);color:var(--on);cursor:pointer;flex:0 0 auto}
-.footer a{color:var(--mid)}.footer a:hover{color:var(--ink)}
-.flegal{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);justify-content:center}
-@media(hover:hover) and (pointer:fine){
-  body.has-cursor,body.has-cursor *{cursor:none!important}
-  body.has-cursor input,body.has-cursor textarea{cursor:text!important}
-  .cursor{position:fixed;top:0;left:0;width:30px;height:30px;border:1.6px solid var(--green2);border-radius:50%;pointer-events:none;z-index:9999;will-change:transform;transition:width .25s,height .25s,background .25s,border-color .25s}
-  .cursor.big{width:60px;height:60px;background:rgba(var(--rgb2),.14);border-color:rgba(var(--rgb2),.5)}
-  .cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;border-radius:50%;background:var(--green2);pointer-events:none;z-index:9999;will-change:transform}
-}
-
-/* ===== fixes responsive movil ===== */
-.cbot-form input{font-size:16px}/* evita zoom iOS al enfocar */
-.cbot-head .x{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
-@media(max-width:640px){
-  .redo,.work,.svc,.incl,.about{padding:90px 0}
-}
-@media(max-width:600px){
-  /* zona inferior: chatbot, barra cookies y footer no se pisan */
-  .cbot{right:var(--pad);bottom:18px;z-index:70}
-  body.ck-visible .cbot{bottom:108px}
-  body.ck-visible .footer{padding-bottom:150px}
-  body.cbot-open .ckbar{transform:translateY(170%)}
-  .cbot-head .x{width:44px;height:44px}
-}
-@media(max-width:560px){
-  .proj .body{padding:30px 22px}
-  .proj .bignum{font-size:48px;left:14px;bottom:10px}
-  .icard{padding:32px var(--pad)}
-  .cbot-chips{gap:10px;padding:0 16px 12px}
-  .cbot-chips button{min-height:40px;padding:10px 14px;font-size:13px}
-}
-@media(max-width:480px){
-  .about .facts{grid-template-columns:1fr 1fr}
-  .about .facts .f:nth-child(2n){border-right:0}
-  .about .facts .f:nth-child(odd){border-right:1px solid var(--line)}
-  .hero h1{font-size:clamp(38px,11vw,54px);overflow-wrap:break-word;hyphens:auto}
-}
-</style>
+<meta name="theme-color" content="#14161B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/generalsans-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plexmono-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="vbg"></div>
-<div class="veil"></div>
-<div class="prog" id="prog"></div>
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+
+<div class="masthead">
+  <div class="row">
+    <span>VZ Studio</span>
+    <span>Webs — Agentes IA — Automatización</span>
+    <span><span class="ok">●</span> Disponible · Murcia–Alicante, ES</span>
+  </div>
+</div>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="#top"><svg viewBox="0 0 120 124" fill="none" aria-label="VZ"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg><span class="bn">VZ Studio</span></a>
-  <div class="nlinks"><a href="#rediseno">Rediseño</a><a href="#trabajo">Trabajo</a><a href="#servicios">Servicios</a><a href="#sobre">Sobre mí</a><a class="cta" href="#contacto">Hablemos</a></div>
+  <div class="row">
+    <a class="brand" href="#top"><svg viewBox="0 0 120 124" fill="none" aria-label="VZ"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg><span class="bn">VZ Studio</span></a>
+    <div class="nlinks">
+      <a href="#rediseno">Rediseño</a>
+      <a href="#trabajo">Trabajo</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#sobre">Estudio</a>
+      <a class="cta" href="#contacto">Hablemos</a>
+    </div>
+  </div>
 </nav>
 
-<section class="hero" id="top">
-  <div class="inner">
-    <span class="eyebrow">Webs · Agentes IA · Automatización</span>
-    <h1>Construyo sistemas<span class="l2">que trabajan</span><span class="l3">por ti.</span></h1>
-    <p class="sub">Diseño y desarrollo <b style="color:var(--ink)">webs premium</b> —nuevas o rediseños—, <b style="color:var(--ink)">agentes de IA</b> y <b style="color:var(--ink)">automatizaciones</b> que trabajan solas. Rápidas, con SEO y blindadas — sin humo, sin ruido.</p>
+<main>
+
+<section class="hero" id="top" data-scene="flow">
+  <div class="wrap">
+    <span class="tag">Estudio digital independiente</span>
+    <h1>Construyo sistemas <span class="dim">que trabajan</span> <span class="hl">por ti.</span></h1>
+    <p class="sub">Diseño y desarrollo <b>webs premium</b> —nuevas o rediseños—, <b>agentes de IA</b> y <b>automatizaciones</b> que trabajan solas. Rápidas, con SEO y blindadas — sin humo, sin ruido.</p>
     <div class="cta-row">
       <a class="btn btn-solid" href="#trabajo">Ver trabajo</a>
       <a class="btn btn-ghost" href="#contacto">Hablemos</a>
     </div>
-    <div class="tags"><span>Webs a medida</span><span>Rediseño</span><span>Agentes IA</span><span>Automatización</span><span>Apps</span></div>
+    <div class="meta">
+      <span><b>Webs a medida</b> — diseño + código</span>
+      <span><b>Agentes IA</b> — web &amp; WhatsApp</span>
+      <span><b>Automatización</b> — sistemas 24/7</span>
+      <span><b>Apps</b> — multiplataforma</span>
+    </div>
   </div>
 </section>
 
-<section class="redo opaque" id="rediseno">
+<section class="redo opaque" id="rediseno" data-scene="grid">
   <div class="wrap">
-    <div class="shead"><span class="sn">01 — Lo que hago</span><h2>Webs, <span class="em-green">agentes IA</span> y automatización — de principio a fin.</h2><p class="rt">Nuevas o rediseños. Y los sistemas que las hacen trabajar.</p></div>
-    <div class="grid">
-      <div>
-        <h2>Tu web nueva o con <span class="em-green">lavado de cara</span> que vende.</h2>
-        <p>Construyo desde cero o reconstruyo lo que tienes, con las últimas tecnologías. Y le meto el cerebro: agentes de IA y automatización que trabajan solos.</p>
-        <div class="pts">
-          <div class="pt"><span class="ic">↻</span><span><b>Web a medida o rediseño.</b> Stack moderno, código limpio, rendimiento real.</span></div>
-          <div class="pt"><span class="ic">✦</span><span><b>IA dentro.</b> Agentes y automatizaciones que atienden y te quitan trabajo.</span></div>
-          <div class="pt"><span class="ic">↑</span><span><b>SEO + blindada.</b> Optimizada para Google y con auditoría de ciberseguridad antes de publicar.</span></div>
+    <div class="shead rv">
+      <span class="tag">Rediseño</span>
+      <h2>Tu web vieja, <span class="hl">reconstruida para vender.</span></h2>
+      <p>Dos casos reales, en producción. De web genérica a web a medida con SEO, seguridad y un diseño que se nota.</p>
+    </div>
+    <div class="pts-row rv">
+      <div class="pt"><span class="m">[01]</span><span><b>Web a medida o rediseño.</b> Stack moderno, código limpio, rendimiento real.</span></div>
+      <div class="pt"><span class="m">[02]</span><span><b>IA dentro.</b> Agentes y automatizaciones que atienden y te quitan trabajo.</span></div>
+      <div class="pt"><span class="m">[03]</span><span><b>SEO + blindada.</b> Optimizada para Google y con auditoría de ciberseguridad antes de publicar.</span></div>
+    </div>
+    <div class="cases">
+      <div class="case rv">
+        <span class="tag case-t">costaehijos.es — industria</span>
+        <figure class="plate">
+          <div class="frame"><picture><source srcset="assets/costa-old.webp" type="image/webp"><img src="assets/costa-old.jpg" alt="Antonio Costa e Hijos — web antigua en WordPress" loading="lazy" width="1400" height="704"></picture></div>
+          <figcaption><span class="a">Antes — WordPress genérico</span></figcaption>
+        </figure>
+        <figure class="plate">
+          <div class="frame"><video src="assets/costa-new.mp4" poster="assets/costa-new-poster.jpg" autoplay muted loop playsinline width="1440" height="819" aria-label="Antonio Costa e Hijos — rediseño con fondo animado"></video></div>
+          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
+        </figure>
+      </div>
+      <div class="case rv rv2">
+        <span class="tag case-t">loyalcapitaladvisors.com — finanzas</span>
+        <figure class="plate">
+          <div class="frame"><picture><source srcset="assets/loyal-old.webp" type="image/webp"><img src="assets/loyal-old.jpg" alt="Loyal Capital — web antigua en WordPress" loading="lazy" width="1200" height="750"></picture></div>
+          <figcaption><span class="a">Antes — WordPress</span></figcaption>
+        </figure>
+        <figure class="plate">
+          <div class="frame"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img src="assets/work-loyal.jpg" alt="Loyal Capital — rediseño actual" loading="lazy" width="1200" height="750"></picture></div>
+          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="work opaque" id="trabajo" data-scene="streams">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="tag">Trabajo</span>
+      <h2>Proyectos reales, <span class="hl">en producción.</span></h2>
+      <p>Finanzas, industria, marketing, sistemas y producto.</p>
+    </div>
+
+    <article class="proj">
+      <div class="media rv">
+        <div class="browser">
+          <div class="bbar"><i></i><i></i><i></i><span class="burl">loyalcapitaladvisors.com</span></div>
+          <div class="bview"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img src="assets/work-loyal.jpg" alt="Loyal Capital Advisors — web boutique financiera" loading="lazy" width="1200" height="750"></picture></div>
         </div>
       </div>
-      <div class="beforeafter">
-        <figure class="ba"><picture><source srcset="assets/loyal-old.webp" type="image/webp"><img src="assets/loyal-old.jpg" alt="Loyal Capital — web antigua en WordPress" loading="lazy"></picture><figcaption><span class="bal antes">Antes · WordPress</span></figcaption></figure>
-        <figure class="ba"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img src="assets/work-loyal.jpg" alt="Loyal Capital — rediseño actual" loading="lazy"></picture><figcaption><span class="bal desp">Después · rediseño</span></figcaption></figure>
+      <div class="body rv rv2">
+        <span class="tag idx">Corporate finance</span>
+        <h3>Loyal Capital Advisors</h3>
+        <p>Web editorial de lujo discreto para una firma boutique de banca de inversión en Madrid, con sistema bilingüe ES/EN propio y mapa de cobertura internacional animado en SVG. Estética private banking que transmite confidencialidad y criterio.</p>
+        <div class="ptags"><span>Web a medida</span><span>Bilingüe i18n</span><span>SVG animado</span></div>
       </div>
+    </article>
+
+    <article class="proj">
+      <div class="media rv">
+        <div class="browser">
+          <div class="bbar"><i></i><i></i><i></i><span class="burl">aionmkt.com</span></div>
+          <div class="bview"><picture><source srcset="assets/work-aion.webp" type="image/webp"><img src="assets/work-aion.jpg" alt="AION Marketing — web de agencia" loading="lazy" width="1200" height="750"></picture></div>
+        </div>
+      </div>
+      <div class="body rv rv2">
+        <span class="tag idx">Agencia digital</span>
+        <h3>AION Marketing</h3>
+        <p>Plataforma multipágina premium en Next.js para una agencia que une marketing, paid media e IA en un mismo sistema. Dark mode con gradientes estilo Apple, casos de éxito con métricas reales y agentes conversacionales como producto estrella.</p>
+        <div class="ptags"><span>Next.js</span><span>React</span><span>Dark mode</span><span>Casos con métricas</span></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="media rv">
+        <div class="browser">
+          <div class="bbar"><i></i><i></i><i></i><span class="burl">costaehijos.es</span></div>
+          <div class="bview"><picture><source srcset="assets/costa-new-poster.webp" type="image/webp"><img src="assets/costa-new-poster.jpg" alt="Antonio Costa e Hijos — rediseño industrial" loading="lazy" width="1440" height="819"></picture></div>
+        </div>
+      </div>
+      <div class="body rv rv2">
+        <span class="tag idx">Industria · Rediseño</span>
+        <h3>Antonio Costa e Hijos</h3>
+        <p>Rediseño completo para una fábrica de envases de madera con tres generaciones de historia: de un WordPress genérico a una web a medida con fondo animado, identidad artesanal y catálogo de marcas propias. En producción.</p>
+        <div class="ptags"><span>Rediseño</span><span>Web a medida</span><span>SEO local</span></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="media rv">
+        <div class="flow-plate">
+          <div class="flow">
+            <div class="fnode">Mensaje WhatsApp entrante</div>
+            <div class="farrow">↓</div>
+            <div class="fnode">Validar · ¿audio? → Whisper</div>
+            <div class="farrow">↓</div>
+            <div class="fnode ai">Agente IA · LLM + memoria</div>
+            <div class="farrow">↓</div>
+            <div class="fnode">Cualificar (switch)</div>
+            <div class="farrow">↓</div>
+            <div class="fbranch"><div class="fnode sm">Responder WhatsApp</div><div class="fnode sm">Guardar lead · DB</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="body rv rv2">
+        <span class="tag idx">Sistemas autónomos · LLM</span>
+        <h3>Automatizaciones &amp; IA con n8n</h3>
+        <p>Pipelines que trabajan solos: chatbots de WhatsApp que cualifican y agendan, sincronización Postgres ↔ Notion, reporting de Meta Ads y distribución de contenido multicanal orquestados con LLMs. Menos tareas repetitivas, más decisiones con datos.</p>
+        <div class="ptags"><span>n8n</span><span>Agentes IA / LLM</span><span>WhatsApp &amp; Meta Ads</span><span>Postgres · Notion</span></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="media rv">
+        <div class="app-plate">
+          <div class="phone back"><picture><source srcset="assets/app-historial.webp" type="image/webp"><img src="assets/app-historial.jpg" alt="App Gestor de Citas — historial" loading="lazy" width="1080" height="2340"></picture></div>
+          <div class="phone front"><picture><source srcset="assets/app-inicio.webp" type="image/webp"><img src="assets/app-inicio.jpg" alt="App Gestor de Citas — inicio" loading="lazy" width="1080" height="2340"></picture></div>
+        </div>
+      </div>
+      <div class="body rv rv2">
+        <span class="tag idx">App multiplataforma · Flutter</span>
+        <h3>App Gestor de Citas</h3>
+        <p>App de reservas para iOS, Android y web con paneles de cliente y administrador, pagos Stripe, facturación en PDF y notificaciones push en tiempo real. Un sistema completo de gestión de citas para cualquier negocio de servicios.</p>
+        <div class="ptags"><span>Flutter</span><span>Firebase</span><span>Stripe</span><span>Multiplataforma</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="svc opaque" id="servicios" data-scene="orbits">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="tag">Servicios</span>
+      <h2>Cinco formas de <span class="hl">quitarte trabajo</span> de encima.</h2>
     </div>
-  </div>
-</section>
-
-<section class="work opaque" id="trabajo">
-  <div class="wrap">
-    <div class="shead"><span class="sn">02 — Trabajo</span><h2>Proyectos reales donde el <span class="em-green">criterio</span> se nota.</h2><p class="rt">En producción: finanzas, marketing, sistemas y producto.</p></div>
-    <article class="proj">
-      <div class="media browser"><div class="bbar"><i></i><i></i><i></i><span class="burl">loyalcapitaladvisors.com</span></div><div class="bview"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img class="shot" src="assets/work-loyal.jpg" alt="Loyal Capital Advisors — web boutique financiera" loading="lazy"></picture></div><span class="bignum">01</span></div>
-      <div class="body"><span class="idx ln">01 — Corporate Finance · Web bilingüe</span><h3 class="ln">Loyal Capital Advisors</h3><p class="ln">Web editorial de lujo discreto para una firma boutique de banca de inversión en Madrid, con sistema bilingüe ES/EN propio y mapa de cobertura internacional animado en SVG. Estética private banking que transmite confidencialidad y criterio.</p><div class="ptags ln"><span>Web a medida</span><span>Bilingüe i18n</span><span>SVG animado</span><span>Editorial</span></div></div>
-    </article>
-    <article class="proj">
-      <div class="media browser"><div class="bbar"><i></i><i></i><i></i><span class="burl">aionmkt.com</span></div><div class="bview"><picture><source srcset="assets/work-aion.webp" type="image/webp"><img class="shot" src="assets/work-aion.jpg" alt="AION Marketing — web de agencia" loading="lazy"></picture></div><span class="bignum">02</span></div>
-      <div class="body"><span class="idx ln">02 — Agencia digital · Plataforma web</span><h3 class="ln">AION Marketing</h3><p class="ln">Plataforma multipágina premium en Next.js para una agencia que une marketing, paid media e IA en un mismo sistema. Dark mode con gradientes estilo Apple, casos de éxito con métricas reales y agentes conversacionales como producto estrella.</p><div class="ptags ln"><span>Next.js</span><span>React</span><span>Dark mode</span><span>Casos con métricas</span></div></div>
-    </article>
-    <article class="proj">
-      <div class="media flow-media"><div class="fill"></div><div class="flow"><span class="ftag">n8n · flujo real</span><div class="fnode trigger">Mensaje WhatsApp entrante</div><div class="farrow">↓</div><div class="fnode">Validar · ¿audio? → Whisper</div><div class="farrow">↓</div><div class="fnode ai">Agente IA · LLM + memoria</div><div class="farrow">↓</div><div class="fnode">Cualificar (switch)</div><div class="farrow">↓</div><div class="fbranch"><div class="fnode sm">Responder WhatsApp</div><div class="fnode sm">Guardar lead · DB</div></div></div><span class="bignum">03</span></div>
-      <div class="body"><span class="idx ln">03 — Sistemas autónomos · LLM</span><h3 class="ln">Automatizaciones &amp; IA con n8n</h3><p class="ln">Pipelines que trabajan solos: chatbots de WhatsApp que cualifican y agendan, sincronización Postgres ↔ Notion, reporting de Meta Ads y distribución de contenido multicanal orquestados con LLMs. Menos tareas repetitivas, más decisiones con datos.</p><div class="ptags ln"><span>n8n</span><span>Agentes IA / LLM</span><span>WhatsApp &amp; Meta Ads</span><span>Postgres · Notion</span></div></div>
-    </article>
-    <article class="proj">
-      <div class="media app"><div class="fill"></div><div class="phone back"><picture><source srcset="assets/app-historial.webp" type="image/webp"><img src="assets/app-historial.jpg" alt="App Gestor de Citas — historial" loading="lazy"></picture></div><div class="phone front"><picture><source srcset="assets/app-inicio.webp" type="image/webp"><img src="assets/app-inicio.jpg" alt="App Gestor de Citas — inicio" loading="lazy"></picture></div><span class="bignum">04</span></div>
-      <div class="body"><span class="idx ln">04 — App multiplataforma · Flutter</span><h3 class="ln">App Gestor de Citas</h3><p class="ln">App de reservas para iOS, Android y web con paneles de cliente y administrador, pagos Stripe, facturación en PDF y notificaciones push en tiempo real. Un sistema completo de gestión de citas para cualquier negocio de servicios.</p><div class="ptags ln"><span>Flutter</span><span>Firebase</span><span>Stripe</span><span>Multiplataforma</span></div></div>
-    </article>
-  </div>
-</section>
-
-<section class="svc opaque" id="servicios">
-  <div class="wrap">
-    <div class="shead"><span class="sn">03 — Servicios</span><h2>Cinco formas de <span class="em-green">quitarte trabajo</span> de encima.</h2><p class="rt">Del código a la interfaz, y los sistemas que lo sostienen.</p></div>
     <div class="svc-list">
-      <div class="svc-row"><span class="n">01</span><h3>Webs a medida</h3><p>Webs premium desde cero. Código limpio, rápido y con un diseño que se siente caro.</p><span class="ar">↗</span></div>
-      <div class="svc-row"><span class="n">02</span><h3>Rediseño web</h3><p>Webs viejas reconstruidas con tecnología actual, SEO y seguridad. Un lavado de cara que vende.</p><span class="ar">↗</span></div>
-      <div class="svc-row"><span class="n">03</span><h3>Agentes de IA</h3><p>Asistentes y agentes que atienden, responden y cualifican por ti — 24/7, en tu web o WhatsApp.</p><span class="ar">↗</span></div>
-      <div class="svc-row"><span class="n">04</span><h3>Automatización &amp; sistemas</h3><p>Conecto tus herramientas y monto flujos que hacen el trabajo repetitivo solos.</p><span class="ar">↗</span></div>
-      <div class="svc-row"><span class="n">05</span><h3>Apps multiplataforma</h3><p>Apps a medida — como mi gestor de citas — para web y móvil con una sola base.</p><span class="ar">↗</span></div>
+      <div class="svc-row rv"><h3>Webs a medida</h3><p>Webs premium desde cero. Código limpio, rápido y con un diseño que se siente caro.</p><span class="ar">↗</span></div>
+      <div class="svc-row rv"><h3>Rediseño web</h3><p>Webs viejas reconstruidas con tecnología actual, SEO y seguridad. Un lavado de cara que vende.</p><span class="ar">↗</span></div>
+      <div class="svc-row rv"><h3>Agentes de IA</h3><p>Asistentes y agentes que atienden, responden y cualifican por ti — 24/7, en tu web o WhatsApp.</p><span class="ar">↗</span></div>
+      <div class="svc-row rv"><h3>Automatización &amp; sistemas</h3><p>Conecto tus herramientas y monto flujos que hacen el trabajo repetitivo solos.</p><span class="ar">↗</span></div>
+      <div class="svc-row rv"><h3>Apps multiplataforma</h3><p>Apps a medida — como mi gestor de citas — para web y móvil con una sola base.</p><span class="ar">↗</span></div>
     </div>
   </div>
 </section>
 
-<section class="incl opaque" id="incluido">
+<section class="incl opaque" id="incluido" data-scene="orbits">
   <div class="wrap">
-    <div class="shead"><span class="sn">04 — Incluido</span><h2>Todo proyecto sale <span class="em-green">completo</span>.</h2><p class="rt">No solo una web bonita. Una web que rinde, segura y coherente.</p></div>
+    <div class="shead rv">
+      <span class="tag">Incluido</span>
+      <h2>Todo proyecto sale <span class="hl">completo.</span></h2>
+      <p>No solo una web bonita. Una web que rinde, segura y coherente.</p>
+    </div>
     <div class="incl-grid">
-      <div class="icard">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7l8-4 8 4v6c0 5-4 8-8 9-4-1-8-4-8-9V7z" stroke="currentColor" stroke-width="1.7"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="icard rv">
+        <span class="m">stack</span>
         <h3>Últimas tecnologías</h3><p>Stack moderno (Next.js y cía). Rápida, mantenible y lista para el futuro.</p>
       </div>
-      <div class="icard">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+      <div class="icard rv rv2">
+        <span class="m">seo</span>
         <h3>SEO de serie</h3><p>Optimización técnica y de contenido para que Google te encuentre y te suba.</p>
       </div>
-      <div class="icard">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3 7-7 9-4-2-7-4-7-9V6l7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+      <div class="icard rv rv3">
+        <span class="m">security</span>
         <h3>Seguridad blindada</h3><p>Auditoría de ciberseguridad profunda antes de desplegar. Cero vulnerabilidades conocidas.</p>
       </div>
-      <div class="icard gift">
-        <span class="badge">Regalo</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 9h16v11H4zM4 9l2-4h12l2 4M12 5v15" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+      <div class="icard rv rv4">
+        <span class="stamp">Regalo</span>
+        <span class="m">marca</span>
         <h3>Tu marca, coherente</h3><p>Al terminar: tu <b>logo rediseñado</b> + <b>banners para LinkedIn</b>. Tu web y tus redes, el mismo idioma.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="about opaque" id="sobre">
+<section class="about opaque" id="sobre" data-scene="converge">
   <div class="wrap">
-    <div class="shead"><span class="sn">05 — Estudio</span><h2>El estudio</h2><p class="rt">Pocos clientes, mucho criterio.</p></div>
+    <div class="shead rv">
+      <span class="tag">Estudio</span>
+      <h2>Pocos clientes, <span class="hl">mucho criterio.</span></h2>
+    </div>
     <div class="about-row">
-      <div class="portrait"><picture><source srcset="assets/vladys-foto.webp" type="image/webp"><img src="assets/vladys-foto.jpg" alt="Vladys Z"></picture></div>
-      <div class="atext">
-        <h2>Soy Vladys. Diseño y construyo <span class="em-green">como si fuera mío.</span></h2>
+      <figure class="plate rv">
+        <div class="frame portrait-frame"><picture><source srcset="assets/vladys-foto.webp" type="image/webp"><img src="assets/vladys-foto.jpg" alt="Vladys Z" loading="lazy" width="600" height="800"></picture></div>
+        <figcaption><span class="a">Vladys Z. — fundador</span></figcaption>
+      </figure>
+      <div class="atext rv rv2">
+        <h3>Soy Vladys. Diseño y construyo como si fuera mío.</h3>
         <p>Desarrollador multiplataforma e IA. Diseño y desarrollo webs premium, monto automatizaciones que eliminan trabajo repetitivo y meto IA donde de verdad mueve la aguja — y dejo cada proyecto rápido, optimizado para SEO y blindado antes de publicar.</p>
-        <p>Me formé como <b>desarrollador multiplataforma</b> en CESUR y tengo <b>varias certificaciones en IA</b>, algunas en <b>DeepLearning.AI</b>. He construido de principio a fin una <b>app multiplataforma de gestión de citas</b> y sistemas que trabajan solos 24/7. Pocos clientes, mucho criterio: a la última, sin humo y sin palabros.</p>
+        <p>Me formé como <b>desarrollador multiplataforma</b> en CESUR y tengo <b>varias certificaciones en IA</b>, algunas en <b>DeepLearning.AI</b>. He construido de principio a fin una <b>app multiplataforma de gestión de citas</b> y sistemas que trabajan solos 24/7. A la última, sin humo y sin palabros.</p>
         <div class="facts">
-          <div class="f"><div class="n">IA certificada</div><div class="k">DeepLearning.AI +</div></div>
-          <div class="f"><div class="n">Multiplataforma</div><div class="k">Web + móvil</div></div>
-          <div class="f"><div class="n">App propia</div><div class="k">Gestor de citas</div></div>
+          <div class="f"><div class="n">IA certificada</div><div class="kk">DeepLearning.AI +</div></div>
+          <div class="f"><div class="n">Multiplataforma</div><div class="kk">Web + móvil</div></div>
+          <div class="f"><div class="n">App propia</div><div class="kk">Gestor de citas</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact" id="contacto">
+<section class="contact" id="contacto" data-scene="converge">
   <div class="wrap">
-    <span class="eyebrow">Contacto</span>
-    <h2>¿Construimos algo<br>que <span class="em-green">valga la pena?</span></h2>
-    <div class="clinks">
+    <span class="tag rv">Contacto</span>
+    <h2 class="rv">¿Construimos algo que <span class="hl">valga la pena?</span></h2>
+    <div class="clinks rv rv2">
       <a class="btn btn-solid" href="mailto:vladysn8n@gmail.com">vladysn8n@gmail.com</a>
       <a class="btn btn-ghost" href="https://wa.me/34722736832" target="_blank" rel="noopener">WhatsApp</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/vladyslav-zinkevych-428812300" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="https://instagram.com/donvladys" target="_blank" rel="noopener">Instagram</a>
     </div>
+    <p class="note rv rv3">Respondo en el día — sin compromiso, sin formularios</p>
   </div>
 </section>
 
+</main>
+
 <footer class="footer">
-  <div class="frow"><span>© 2026 VZ Studio · Vladys Z.</span><span><a href="https://wa.me/34722736832" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://www.linkedin.com/in/vladyslav-zinkevych-428812300" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://instagram.com/donvladys" target="_blank" rel="noopener">Instagram</a> · vladysn8n@gmail.com</span></div>
-  <div class="frow flegal"><span><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></span></div>
+  <div class="cols">
+    <div>
+      <span class="fh">Colofón</span>
+      <p class="colofon">Hecha a mano por Vladys Z. — HTML, CSS y JS vanilla, sin plantillas ni WordPress. El fondo es un sistema generativo programado a medida para esta web. Sin cookies, sin rastreadores.</p>
+    </div>
+    <div>
+      <span class="fh">Contacto</span>
+      <ul>
+        <li><a href="mailto:vladysn8n@gmail.com">vladysn8n@gmail.com</a></li>
+        <li><a href="https://wa.me/34722736832" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.linkedin.com/in/vladyslav-zinkevych-428812300" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://instagram.com/donvladys" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="fh">Legal</span>
+      <ul>
+        <li><a href="aviso-legal.html">Aviso legal</a></li>
+        <li><a href="privacidad.html">Privacidad</a></li>
+        <li><a href="cookies.html">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legalrow"><span>© 2026 VZ Studio · Vladys Z.</span><span>Murcia / Alicante, España</span></div>
 </footer>
 
-<!-- AVISO COOKIES -->
-<div class="ckbar" id="ckbar" role="dialog" aria-label="Aviso de cookies">
-  <p>Esta web <b>no usa cookies de seguimiento</b> — solo recursos técnicos (fuentes y librerías) que pueden registrar tu IP. <a href="cookies.html">Más info</a>.</p>
-  <button onclick="ckOk()">Entendido</button>
-</div>
-
-<!-- CHATBOT -->
-<div class="cbot" id="cbot">
-  <button class="cbot-launch" onclick="cbToggle(true)" aria-label="Abrir asistente IA">
-    <span class="av"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H8l-4 4V5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="dot"></span></span>
-    Asistente IA
-  </button>
-  <div class="cbot-panel" role="dialog" aria-label="Asistente de Vladys">
-    <div class="cbot-head">
-      <span class="av"><svg viewBox="0 0 120 124" fill="none"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="9" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/></svg></span>
-      <div class="t"><b>Asistente de Vladys</b><span>IA · responde al instante</span></div>
-      <button class="x" onclick="cbToggle(false)" aria-label="Cerrar">×</button>
-    </div>
-    <div class="cbot-log" id="cbLog"></div>
-    <div class="cbot-chips" id="cbChips"></div>
-    <form class="cbot-form" id="cbForm"><input id="cbIn" placeholder="Escribe tu duda…" autocomplete="off"><button type="submit" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></form>
-  </div>
-</div>
-
-<script>
-/* ===== Lenis smooth scroll ===== */
-let lenis=null;
-if(window.Lenis && !matchMedia('(prefers-reduced-motion:reduce)').matches){
-  try{lenis=new Lenis({lerp:0.09,smoothWheel:true});
-    if(!window.gsap){(function r(t){lenis.raf(t);requestAnimationFrame(r);})(0);}
-    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id&&id.length>1){const t=document.querySelector(id);if(t){e.preventDefault();lenis.scrollTo(t,{offset:-10});}}}));
-  }catch(e){console.error('lenis',e);}
-}
-
-/* ===== fondo Red IA grafito (Vanta NET) ===== */
-let vbgFx=null;
-function initBG(){ if(!(window.VANTA&&window.THREE))return;
-  try{vbgFx=VANTA.NET({el:'#vbg',THREE:window.THREE,mouseControls:true,touchControls:true,gyroControls:false,
-    color:0x7c828c,backgroundColor:0x14161b,points:9.0,maxDistance:21.0,spacing:19.0,showDots:true});}catch(e){console.error(e);}}
-/* three.js(600KB)+Vanta SOLO desktop sin reduced-motion, tras load: fuera de critical path; movil NO descarga 614KB ni corre WebGL */
-function loadVantaBG(){
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<768)return;
-  const s=document.createElement('script');s.src='vendor/three.min.js';
-  s.onload=function(){const v=document.createElement('script');v.src='vendor/vanta.net.min.js';v.onload=initBG;document.body.appendChild(v);};
-  document.body.appendChild(s);
-}
-window.addEventListener('load',loadVantaBG);
-
-/* ===== nav + progreso ===== */
-const prog=document.getElementById('prog');
-addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>40);
-  if(prog){const hh=document.documentElement.scrollHeight-innerHeight;prog.style.width=(hh>0?scrollY/hh*100:0)+'%';}},{passive:true});
-
-/* ===== botones magnéticos ===== */
-document.querySelectorAll('.btn').forEach(b=>{
-  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();const x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform='translate('+(x*.22)+'px,'+(y*.3)+'px)';});
-  b.addEventListener('mouseleave',()=>{b.style.transform='translate(0,0)';});
-});
-
-/* ===== GSAP reveals ===== */
-if(window.gsap&&window.ScrollTrigger){
-  gsap.registerPlugin(ScrollTrigger);
-  if(window.SplitText)gsap.registerPlugin(SplitText);
-  if(lenis){lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}
-  // titular hero cinético (SplitText)
-  if(window.SplitText&&document.fonts){document.fonts.ready.then(()=>{try{
-    const sp=new SplitText('.hero h1',{type:'lines,chars',linesClass:'sline'});
-    gsap.from(sp.chars,{yPercent:120,opacity:0,duration:.85,ease:'power4.out',stagger:0.012,delay:.12});
-  }catch(e){console.error('split',e);gsap.from('.hero h1',{y:30,opacity:0,duration:.9,ease:'power3.out'});}});}
-  else{gsap.from('.hero h1',{y:34,opacity:0,duration:.9,ease:'power3.out',delay:.15});}
-  gsap.from('.hero .eyebrow,.hero .sub,.hero .cta-row,.hero .tags',{y:34,opacity:0,duration:1,ease:'power3.out',stagger:.08,delay:.25});
-  gsap.utils.toArray('.shead').forEach(el=>gsap.from(el,{y:36,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}}));
-  gsap.from('.redo .grid>div:first-child>*',{y:30,opacity:0,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'.redo .grid',start:'top 78%'}});
-  gsap.from('.beforeafter',{x:40,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.redo .grid',start:'top 78%'}});
-  gsap.utils.toArray('.proj').forEach(p=>{
-    const media=p.querySelector('.media');
-    const glint=document.createElement('span');glint.className='glint';media.appendChild(glint);
-    const num=p.querySelector('.bignum');const target=parseInt(num.textContent,10)||0;
-    const tl=gsap.timeline({scrollTrigger:{trigger:p,start:'top 78%'}});
-    tl.fromTo(media,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.0,ease:'power3.inOut'})
-      .fromTo(glint,{left:'-60%'},{left:'130%',duration:.95,ease:'power2.inOut'},'-=.5')
-      .from(num,{x:-30,opacity:0,duration:.7,ease:'power2.out',onStart(){const o={v:0};gsap.to(o,{v:target,duration:1,ease:'power1.out',onUpdate(){num.textContent=String(Math.round(o.v)).padStart(2,'0')}})}},'-=.75')
-      .from(p.querySelectorAll('.body .ln'),{y:30,opacity:0,duration:.7,ease:'power3.out',stagger:.1},'-=.55');
-    gsap.to(p.querySelector('.media .shot')||p.querySelector('.media .fill'),{yPercent:-8,ease:'none',scrollTrigger:{trigger:p,start:'top bottom',end:'bottom top',scrub:true}});
-  });
-  gsap.utils.toArray('.svc-row').forEach(el=>gsap.from(el,{y:28,opacity:0,duration:.7,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}}));
-  gsap.utils.toArray('.icard').forEach((el,i)=>gsap.from(el,{y:34,opacity:0,duration:.7,ease:'power3.out',delay:i*.06,scrollTrigger:{trigger:'.incl-grid',start:'top 82%'}}));
-  gsap.from('.portrait',{scale:.9,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.about-row',start:'top 80%'}});
-  gsap.from('.atext>*',{y:30,opacity:0,duration:.8,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'.atext',start:'top 88%'}});
-  gsap.from('.contact .eyebrow,.contact h2,.contact .clinks',{y:34,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'.contact',start:'top 82%'}});
-}
-
-/* ===== cursor firma (custom, fiable) ===== */
-(function(){
-  if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
-  const ring=document.createElement('div');ring.className='cursor';
-  const dot=document.createElement('div');dot.className='cursor-dot';
-  document.body.appendChild(ring);document.body.appendChild(dot);
-  document.body.classList.add('has-cursor');
-  let rx=innerWidth/2,ry=innerHeight/2,x=rx,y=ry;
-  addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;dot.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%)';},{passive:true});
-  (function loop(){rx+=(x-rx)*0.2;ry+=(y-ry)*0.2;ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
-  const HOV='a,button,.btn,.svc-row,.proj,.cbot-launch,.icard';
-  addEventListener('mouseover',e=>{if(e.target.closest&&e.target.closest(HOV))ring.classList.add('big');},{passive:true});
-  addEventListener('mouseout',e=>{if(e.target.closest&&e.target.closest(HOV))ring.classList.remove('big');},{passive:true});
-})();
-
-/* ===== aviso cookies ===== */
-(function(){var b=document.getElementById('ckbar');if(!b)return;function show(){b.classList.add('show');document.body.classList.add('ck-visible');}try{if(!localStorage.getItem('vz-ck'))setTimeout(show,900);}catch(e){setTimeout(show,900);}window.ckOk=function(){b.classList.remove('show');document.body.classList.remove('ck-visible');try{localStorage.setItem('vz-ck','1');}catch(e){}};})();
-
-/* ===== chatbot cualificador (scripted, base ampliada, cero coste) ===== */
-(function(){
-  const log=document.getElementById('cbLog'),chips=document.getElementById('cbChips'),form=document.getElementById('cbForm'),input=document.getElementById('cbIn');
-  let greeted=false;
-  const C='Escríbeme y lo vemos sin compromiso:<br><a href="mailto:vladysn8n@gmail.com" style="color:var(--green2);text-decoration:underline">vladysn8n@gmail.com</a> &middot; <a href="https://wa.me/34722736832" target="_blank" style="color:var(--green2);text-decoration:underline">WhatsApp</a> &middot; <a href="https://www.linkedin.com/in/vladyslav-zinkevych-428812300" target="_blank" style="color:var(--green2);text-decoration:underline">LinkedIn</a>';
-  const START=[['¿Qué hace Vladys?','que'],['Quiero una web','web'],['Agente IA / chatbot','agentes'],['Automatizar algo','automat'],['¿Cuánto cuesta?','precio']];
-  const KB={
-    que:{t:'Vladys (VZ Studio) hace <b>webs premium</b> (nuevas o rediseño), <b>agentes de IA</b>, <b>automatizaciones</b>, <b>apps multiplataforma</b> y <b>chatbots</b>. Todo con SEO, seguridad y un diseño que vende.',c:[['Quiero una web','web'],['Agente IA','agentes'],['Automatizar','automat'],['Precio','precio']]},
-    web:{t:'Webs a medida o rediseño: rápidas, modernas, con SEO de serie y blindadas. ¿Tienes web ya?',c:[['No, desde cero','cierre'],['Sí, rediseñarla','redo'],['Ver trabajo','trabajo']]},
-    redo:{t:'Cojo tu web vieja y la reconstruyo con tecnología actual, SEO y seguridad — un lavado de cara que vende.',c:[['Me interesa','cierre'],['Precio','precio']]},
-    agentes:{t:'Monto <b>agentes de IA</b> que atienden, responden dudas y cualifican clientes 24/7, en tu web o WhatsApp. Justo como yo ahora mismo 🙂',c:[['Lo quiero','cierre'],['¿Cuánto cuesta?','precio']]},
-    automat:{t:'Automatizo procesos: conecto tus herramientas y monto flujos que trabajan solos (integraciones + IA). Se acabó el copia-pega.',c:[['Me interesa','cierre'],['Precio','precio']]},
-    app:{t:'Apps multiplataforma (web + móvil, una sola base). Como mi gestor de citas, de principio a fin.',c:[['Me interesa','cierre'],['Precio','precio']]},
-    seo:{t:'Toda web sale optimizada para <b>SEO</b> de serie: técnico + contenido, para que Google te encuentre y te suba.',c:[['Quiero una web','web'],['Hablar','cierre']]},
-    seguridad:{t:'Antes de publicar hago una <b>auditoría de ciberseguridad</b> profunda. Tu web sale blindada, sin vulnerabilidades conocidas.',c:[['Quiero una web','web'],['Hablar','cierre']]},
-    regalo:{t:'Al terminar te regalo tu <b>logo rediseñado</b> + <b>banners para LinkedIn</b>, para que web y redes hablen el mismo idioma.',c:[['Genial','cierre'],['Ver servicios','que']]},
-    precio:{t:'Cada proyecto es distinto, pero te doy presupuesto claro desde el inicio — sin sorpresas. Cuéntame qué quieres y te paso un número real.',c:[['Quiero una web','web'],['Agente IA','agentes'],['Hablar con Vladys','cierre']]},
-    proceso:{t:'4 pasos: <b>entender → diseñar</b> (te enseño antes de tocar código) <b>→ construir → lanzar y mejorar</b>. Claro y sin tecnicismos.',c:[['Precio','precio'],['Empezar','cierre']]},
-    tiempo:{t:'Depende del proyecto, pero soy rápido y trabajo con pocos clientes a la vez. Te doy fecha real al cerrar el alcance.',c:[['Precio','precio'],['Hablar','cierre']]},
-    porque:{t:'Pocos clientes, mucho criterio. Desarrollador multiplataforma + <b>certificado en IA (DeepLearning.AI)</b>. Hago que la tecnología trabaje para ti — rápida, con SEO y segura.',c:[['Ver trabajo','trabajo'],['Hablar','cierre']]},
-    trabajo:{t:'Algunos: Loyal Capital Advisors (web boutique financiera), AION Marketing, chatbots &amp; automatizaciones, y una app de gestión de citas. Tienes la sección "Trabajo" justo arriba 👆',c:[['Quiero algo así','cierre'],['Precio','precio']]},
-    chatbot:{t:'Sí — este asistente es un ejemplo de lo que monto. Te hago uno a medida para tu web o WhatsApp.',c:[['Lo quiero','cierre'],['Precio','precio']]},
-    cierre:{t:'Perfecto. '+C,c:START},
-    contacto:{t:C,c:START},
-    gracias:{t:'¡A ti! Cuando quieras lo concretamos. '+C,c:START}
-  };
-  function add(html,who){const d=document.createElement('div');d.className='msg '+who;if(who==='me'){d.textContent=html;}else{d.innerHTML=html;}log.appendChild(d);log.scrollTop=log.scrollHeight;}
-  function typing(){const d=document.createElement('div');d.className='typing';d.id='cbT';d.innerHTML='<i></i><i></i><i></i>';log.appendChild(d);log.scrollTop=log.scrollHeight;}
-  function setChips(arr){chips.innerHTML='';(arr||[]).forEach(c=>{const b=document.createElement('button');b.textContent=c[0];b.onclick=()=>{add(c[0],'me');setChips([]);reply(c[1]);};chips.appendChild(b);});}
-  function reply(i){const k=KB[i]||KB.contacto;typing();setTimeout(()=>{const e=document.getElementById('cbT');if(e)e.remove();add(k.t,'bot');setChips(k.c);},560);}
-  function detect(x){
-    if(/(precio|cuesta|cuanto|cuánto|tarifa|presupuesto|vale|coste|euros)/.test(x))return'precio';
-    if(/(redise|web vieja|web antigua|lenta|moderniz|actualiz|renovar|lavado)/.test(x))return'redo';
-    if(/(agente|chatbot|bot|asistente)/.test(x))return'agentes';
-    if(/(automat|flujo|workflow|integr|n8n|zapier|repetit|tarea)/.test(x))return'automat';
-    if(/(app|aplicaci|m[oó]vil|android|ios)/.test(x))return'app';
-    if(/(seo|google|posicion|buscador|aparecer)/.test(x))return'seo';
-    if(/(segur|ciber|vulnerab|hacke|protec)/.test(x))return'seguridad';
-    if(/(regalo|logo|banner|identidad)/.test(x))return'regalo';
-    if(/(proceso|c[oó]mo trabaj|pasos|fase|empez)/.test(x))return'proceso';
-    if(/(tiempo|tarda|plazo|cuando|rapido|r[aá]pido)/.test(x))return'tiempo';
-    if(/(por qu[eé]|porque|confiar|garant|experiencia|qui[eé]n eres)/.test(x))return'porque';
-    if(/(trabajo|proyecto|portfolio|ejemplo|caso)/.test(x))return'trabajo';
-    if(/(contact|whats|email|correo|hablar|escrib|llamar|reun)/.test(x))return'contacto';
-    if(/(gracias|genial|perfecto|estupendo)/.test(x))return'gracias';
-    if(/(web|p[aá]gina|pagina|landing|sitio)/.test(x))return'web';
-    if(/(hola|hey|buenas|saludos|hello)/.test(x))return'que';
-    if(/(ia|inteligencia|gpt|llm)/.test(x))return'agentes';
-    return'que';
-  }
-  window.cbToggle=function(open){const c=document.getElementById('cbot');c.classList.toggle('open',open);document.body.classList.toggle('cbot-open',open);
-    if(open&&!greeted){greeted=true;typing();setTimeout(()=>{const e=document.getElementById('cbT');if(e)e.remove();add('Hola 👋 Soy el asistente de Vladys. Te ayudo con webs, agentes de IA, automatización… ¿qué necesitas?','bot');setChips(START);},500);}};
-  form.addEventListener('submit',e=>{e.preventDefault();const v=input.value.trim();if(!v)return;add(v,'me');input.value='';setChips([]);reply(detect(v.toLowerCase()));});
-})();
-</script>
+<script src="js/bg.js" defer></script>
+<script src="js/app.js" defer></script>
 </body>
 </html>
