@@ -1,0 +1,3 @@
+/* Sin JS no salta el IntersectionObserver que revela el contenido.
+   Esta hoja solo la carga <noscript>, para que la página siga siendo legible. */
+.rv{opacity:1;transform:none;transition:none}

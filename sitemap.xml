@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://vzstudio.dev/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://vzstudio.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://vzstudio.dev/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vzstudio.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vzstudio.dev/"/>
+    <changefreq>monthly</changefreq><priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://vzstudio.dev/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://vzstudio.dev/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vzstudio.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vzstudio.dev/"/>
+    <changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
 </urlset>

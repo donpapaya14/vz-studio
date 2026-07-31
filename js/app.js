@@ -10,6 +10,24 @@
     }, { passive: true });
   }
 
+  // vídeos: se descargan solo cuando se acercan a la pantalla (el póster va antes)
+  var lazyVideos = document.querySelectorAll('video[data-src]');
+  function loadVideo(v) {
+    if (v.src) return;
+    v.src = v.getAttribute('data-src');
+    v.removeAttribute('data-src');
+  }
+  if ('IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { loadVideo(e.target); vio.unobserve(e.target); }
+      });
+    }, { rootMargin: '300px 0px' });
+    lazyVideos.forEach(function (v) { vio.observe(v); });
+  } else {
+    lazyVideos.forEach(loadVideo);
+  }
+
   // reveals con IntersectionObserver (respeta reduced-motion vía CSS)
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
