@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero — prototipo BLOQUES</title>
+<style>
+/* ============================================================
+   Hero — prototipo BLOQUES. Autocontenido: fuentes por ruta
+   relativa, sin vendor, sin CDN. WebGL puro (WebGL1 basta).
+   ============================================================ */
+
+@font-face{font-family:"Bricolage Grotesque";src:url("../fonts/bricolage-var.woff2") format("woff2");font-weight:700 800;font-style:normal;font-display:swap}
+@font-face{font-family:"General Sans";src:url("../fonts/generalsans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"General Sans";src:url("../fonts/generalsans-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"General Sans";src:url("../fonts/generalsans-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"General Sans";src:url("../fonts/generalsans-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../fonts/plexmono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../fonts/plexmono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+
+:root{
+  --gr:#14161B;
+  --tinta:#16140F;
+  --verde:#C6FF3D;
+  --ink:#ECEEF2;
+  --ink2:#A8AEB9;
+  --display:"Bricolage Grotesque",sans-serif;
+  --sans:"General Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono","SF Mono",Menlo,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{background:var(--gr);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--verde);color:var(--tinta)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,5vw,64px)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.brand svg{width:20px;height:21px}
+.brand .bn{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.nlinks{display:flex;align-items:center;gap:28px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.nlinks a{color:var(--ink2)}
+.nlinks a:hover{color:var(--ink)}
+.nlinks .cta{background:var(--verde);color:var(--tinta);padding:10px 18px;font-weight:500}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;background:var(--gr);overflow:hidden}
+
+#vz{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+
+/* el vídeo solo alimenta la textura del shader: no se ve como elemento HTML */
+#vz-src{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+
+.hero-copy{position:absolute;left:0;bottom:9vh;z-index:2;max-width:640px;padding:clamp(20px,5vw,64px)}
+.tag{display:block;font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:18px}
+.hero-copy h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.2vw,76px);line-height:.95;letter-spacing:-.03em;color:var(--ink)}
+.hero-copy h1 .hl{color:var(--verde)}
+.hero-copy .sub{margin-top:20px;max-width:520px;font-family:var(--sans);font-size:20px;line-height:1.5;color:var(--ink2)}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:16px 22px;display:inline-block}
+.btn-solid{background:var(--verde);color:var(--tinta)}
+.btn-ghost{border:1px solid rgba(236,238,242,.24);color:var(--ink)}
+.meta{margin-top:28px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+
+.avail{position:absolute;right:clamp(20px,5vw,64px);bottom:9vh;z-index:2;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.avail .dot{width:6px;height:6px;border-radius:50%;background:var(--verde)}
+
+/* fallback: wordmark estático cuando no hay WebGL o reduced-motion */
+.vz-static{
+  display:none;position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+  font-family:var(--display);font-weight:800;line-height:1;font-size:clamp(180px,40vw,520px);
+  background:url("../assets/hero-poster.webp") center/cover;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  pointer-events:none;white-space:nowrap;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #vz,#vz-src{display:none}
+  .vz-static{display:block}
+}
+
+@media(max-width:700px){
+  .hero-copy h1{font-size:clamp(36px,10vw,48px)}
+  .vz-static{top:36%;font-size:clamp(160px,50vw,420px)}
+  .avail{display:none} /* sin sitio en móvil sin pisar la copy */
+}
+
+/* ---------- next: solo para ver el corte de color bajo el hero ---------- */
+.next{min-height:60vh;background:var(--verde);color:var(--tinta);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 clamp(20px,5vw,64px)}
+.next h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,6vw,64px);line-height:1.05;letter-spacing:-.02em}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 120 124" fill="none" aria-label="VZ"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg>
+    <span class="bn">VZ</span>
+  </a>
+  <nav class="nlinks">
+    <a href="#automatizacion">Automatización</a>
+    <a href="#rediseno">Rediseño</a>
+    <a href="#trabajo">Trabajo</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#sobre">Estudio</a>
+    <a href="/en/" hreflang="en" lang="en">EN</a>
+    <a class="cta" href="#contacto">Hablemos</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <canvas id="vz" aria-hidden="true"></canvas>
+
+  <!-- el src lo pone el JS según orientación: <source media> no se respeta dentro de <video> -->
+  <video id="vz-src" muted autoplay loop playsinline preload="metadata" crossorigin="anonymous" poster="../assets/hero-poster.webp" aria-hidden="true"></video>
+
+  <div class="hero-copy">
+    <span class="tag">Estudio digital independiente</span>
+    <h1>Sistemas que trabajan <span class="hl">por ti.</span></h1>
+    <p class="sub">Automatizaciones con n8n, agentes de IA y webs premium. El trabajo repetitivo, hecho solo; lo que se ve, a la altura.</p>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="#automatizacion">Ver automatizaciones</a>
+      <a class="btn btn-ghost" href="#contacto">Hablemos</a>
+    </div>
+    <div class="meta">Automatización — sistemas 24/7 · Agentes IA — web &amp; WhatsApp · Webs a medida — diseño + código</div>
+  </div>
+
+  <div class="avail" aria-hidden="true"><span class="dot"></span>Disponible · Remoto · Murcia–Alicante, ES</div>
+
+  <div class="vz-static" aria-hidden="true">VZ</div>
+</section>
+
+<section class="next" data-bg="verde">
+  <h2>El trabajo repetitivo, hecho solo.</h2>
+</section>
+
+<script>
+(function(){
+  "use strict";
+
+  var hero = document.getElementById("top");
+  var canvas = document.getElementById("vz");
+  var video = document.getElementById("vz-src");
+  var vzStatic = document.querySelector(".vz-static");
+  var heroCopy = document.querySelector(".hero-copy");
+
+  var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // sin gancho de ratón real (táctil/trackpad sin hover): el shader "respira" solo
+  var conHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var esMovil = window.matchMedia("(max-width: 700px)").matches;
+
+  function clamp(v, min, max){ return Math.min(max, Math.max(min, v)); }
+  function lerp(a, b, t){ return a + (b - a) * t; }
+
+  // reduced-motion o sin WebGL: nada de canvas/vídeo, solo el póster recortado en texto
+  function usarFallback(){
+    canvas.remove();
+    video.remove();
+    vzStatic.style.display = "block";
+  }
+
+  if (reducido) { usarFallback(); return; }
+
+  var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+  if (!gl) { usarFallback(); return; }
+
+  // ---------- shaders ----------
+  var VERT = [
+    "attribute vec2 aPos;",
+    "varying vec2 vUv;",
+    "void main(){",
+    "  vUv = aPos * 0.5 + 0.5;",
+    "  gl_Position = vec4(aPos, 0.0, 1.0);",
+    "}"
+  ].join("\n");
+
+  // simplex 2D (Ashima Arts), dominio público — ruido para el desplazamiento líquido
+  var FRAG = [
+    "precision mediump float;",
+    "varying vec2 vUv;",
+    "uniform float uTime;",
+    "uniform vec2  uMouse;",
+    "uniform float uVel;",
+    "uniform float uScale;",
+    "uniform float uCenterY;",
+    "uniform float uAspectVideo;",
+    "uniform float uAspectCanvas;",
+    "uniform sampler2D uMask;",
+    "uniform sampler2D uVideo;",
+    "",
+    "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}",
+    "vec2 mod289(vec2 x){return x-floor(x*(1.0/289.0))*289.0;}",
+    "vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}",
+    "float snoise(vec2 v){",
+    "  const vec4 C = vec4(0.211324865405187, 0.366025403784439,",
+    "                      -0.577350269189626, 0.024390243902439);",
+    "  vec2 i  = floor(v + dot(v, C.yy));",
+    "  vec2 x0 = v -   i + dot(i, C.xx);",
+    "  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);",
+    "  vec4 x12 = x0.xyxy + C.xxzz;",
+    "  x12.xy -= i1;",
+    "  i = mod289(i);",
+    "  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0))",
+    "         + i.x + vec3(0.0, i1.x, 1.0));",
+    "  vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy),",
+    "                            dot(x12.zw, x12.zw)), 0.0);",
+    "  m = m * m; m = m * m;",
+    "  vec3 x = 2.0 * fract(p * C.www) - 1.0;",
+    "  vec3 h = abs(x) - 0.5;",
+    "  vec3 ox = floor(x + 0.5);",
+    "  vec3 a0 = x - ox;",
+    "  m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);",
+    "  vec3 g;",
+    "  g.x  = a0.x  * x0.x  + h.x  * x0.y;",
+    "  g.yz = a0.yz * x12.xz + h.yz * x12.yw;",
+    "  return 130.0 * dot(m, g);",
+    "}",
+    "",
+    "// ajuste 'cover' del uv del vídeo según relación de aspecto",
+    "vec2 cubrir(vec2 uv, float aspectCanvas, float aspectVideo){",
+    "  vec2 r = uv;",
+    "  if (aspectCanvas > aspectVideo) {",
+    "    float s = aspectVideo / aspectCanvas;",
+    "    r.y = (r.y - 0.5) * s + 0.5;",
+    "  } else {",
+    "    float s = aspectCanvas / aspectVideo;",
+    "    r.x = (r.x - 0.5) * s + 0.5;",
+    "  }",
+    "  return r;",
+    "}",
+    "",
+    "void main(){",
+    "  vec2 centro = vec2(0.5, uCenterY);",
+    // uScale < 1 al bajar el scroll: dividir agranda el área muestreada = las letras encogen
+    "  vec2 uvEscalada = centro + (vUv - centro) / uScale;",
+    "",
+    "  float d = smoothstep(0.35, 0.0, distance(vUv, uMouse));",
+    "  vec2 desp = vec2(",
+    "    snoise(vUv * 3.0 + uTime * 0.15),",
+    "    snoise(vUv * 3.0 - uTime * 0.12)",
+    "  ) * (0.006 + 0.03 * d * uVel);",
+    "",
+    "  vec2 maskUv = uvEscalada + desp;",
+    "  vec2 uvVideo = cubrir(vUv, uAspectCanvas, uAspectVideo) + desp * 0.5;",
+    "",
+    "  float m = texture2D(uMask, maskUv).a;",
+    "",
+    "  vec3 fondo = vec3(0.078, 0.086, 0.106);",
+    "  vec3 vid = texture2D(uVideo, uvVideo).rgb;",
+    "  vid = mix(vid, vid * vec3(0.85, 1.0, 0.8), 0.25);",
+    "",
+    "  vec3 col = mix(fondo, vid, m);",
+    "",
+    "  float borde = smoothstep(0.0, 0.02, m) - smoothstep(0.02, 0.06, m);",
+    "  col += vec3(0.776, 1.0, 0.239) * borde * 0.35;",
+    "",
+    "  col += (fract(sin(dot(gl_FragCoord.xy + uTime * 60.0, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) * 0.045;",
+    "  col *= 1.0 - 0.35 * smoothstep(0.55, 1.0, distance(vUv, vec2(0.5)));",
+    "",
+    "  gl_FragColor = vec4(col, 1.0);",
+    "}"
+  ].join("\n");
+
+  function compilar(tipo, fuente){
+    var s = gl.createShader(tipo);
+    gl.shaderSource(s, fuente);
+    gl.compileShader(s);
+    return s;
+  }
+
+  var vs = compilar(gl.VERTEX_SHADER, VERT);
+  var fs = compilar(gl.FRAGMENT_SHADER, FRAG);
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { usarFallback(); return; }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, "aPos");
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime          = gl.getUniformLocation(prog, "uTime");
+  var uMouse         = gl.getUniformLocation(prog, "uMouse");
+  var uVel           = gl.getUniformLocation(prog, "uVel");
+  var uScale         = gl.getUniformLocation(prog, "uScale");
+  var uCenterY       = gl.getUniformLocation(prog, "uCenterY");
+  var uAspectVideo   = gl.getUniformLocation(prog, "uAspectVideo");
+  var uAspectCanvas  = gl.getUniformLocation(prog, "uAspectCanvas");
+  var uMask          = gl.getUniformLocation(prog, "uMask");
+  var uVideo         = gl.getUniformLocation(prog, "uVideo");
+
+  // ---------- texturas ----------
+  var texMask = gl.createTexture();
+  var texVideo = gl.createTexture();
+
+  function prepararTextura(tex){
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  }
+  prepararTextura(texMask);
+  prepararTextura(texVideo);
+
+  // póster como textura de vídeo hasta que el <video> tenga datos reales
+  var poster = new Image();
+  var posterListo = false;
+  poster.src = "../assets/hero-poster.webp";
+  poster.onload = function(){
+    posterListo = true;
+    aspectVideo = poster.naturalWidth / poster.naturalHeight;
+    gl.bindTexture(gl.TEXTURE_2D, texVideo);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, poster);
+  };
+
+  var aspectVideo = 16 / 9;
+  // vertical en móvil apaisado-no: el clip 9:16 pesa la mitad y cubre sin recortar
+  video.src = matchMedia("(orientation: portrait)").matches
+    ? "../assets/hero-loop-v.mp4"
+    : "../assets/hero-loop.mp4";
+  video.addEventListener("loadedmetadata", function(){
+    if (video.videoWidth && video.videoHeight) {
+      aspectVideo = video.videoWidth / video.videoHeight;
+    }
+  });
+
+  // ---------- máscara del wordmark (rasterizada en canvas 2D offscreen) ----------
+  var cyNorm = esMovil ? 0.36 : 0.53;      // medido desde arriba; en desktop baja para no pisar el nav
+  var centerYUv = 1 - cyNorm;              // convertido a espacio vUv (origen abajo, por el flip_y)
+  var maskCanvas = document.createElement("canvas");
+  var maskCtx = maskCanvas.getContext("2d");
+  var fuenteLista = false;
+
+  function rasterizarMascara(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    maskCanvas.width = w;
+    maskCanvas.height = h;
+
+    var ratioObjetivo = esMovil ? 0.92 : 0.70;
+    maskCtx.clearRect(0, 0, w, h);
+    // desenfoque de 1px: suaviza el borde de la máscara (sin él las letras salen dentadas)
+    maskCtx.filter = "blur(" + (1.1 * dpr).toFixed(1) + "px)";
+    maskCtx.fillStyle = "#fff";
+    maskCtx.textAlign = "center";
+    maskCtx.textBaseline = "middle";
+
+    // tamaño de fuente calculado a partir de una medida de referencia,
+    // para que measureText('VZ') ocupe el ratio de ancho objetivo
+    var refPx = 100;
+    maskCtx.font = "800 " + refPx + 'px "Bricolage Grotesque"';
+    var anchoRef = maskCtx.measureText("VZ").width || refPx;
+    var fontPx = refPx * (w * ratioObjetivo) / anchoRef;
+    maskCtx.font = "800 " + fontPx + 'px "Bricolage Grotesque"';
+
+    var cy = h * cyNorm;
+    maskCtx.fillText("VZ", w / 2, cy);
+
+    gl.bindTexture(gl.TEXTURE_2D, texMask);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, maskCanvas);
+  }
+
+  // esperar la fuente real antes de rasterizar: si no, se mide con la fallback y sale mal
+  document.fonts.load('800 100px "Bricolage Grotesque"').then(function(){
+    fuenteLista = true;
+    ajustarTamano();
+  }).catch(function(){
+    fuenteLista = true; // seguimos igual: mejor una máscara aproximada que ninguna
+    ajustarTamano();
+  });
+
+  // ---------- tamaño / resize ----------
+  var aspectCanvas = 1;
+  function ajustarTamano(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+    }
+    aspectCanvas = w / h;
+    if (fuenteLista) rasterizarMascara();
+  }
+  window.addEventListener("resize", ajustarTamano);
+  ajustarTamano();
+
+  // ---------- ratón: posición + velocidad, con inercia ----------
+  var mouseObjetivo = { x: 0.5, y: centerYUv };
+  var mouseActual = { x: 0.5, y: centerYUv };
+  var velObjetivo = 0;
+  var velActual = 0;
+  var ultimoMouse = null;
+  var ultimoTiempo = 0;
+
+  if (conHover) {
+    canvas.parentElement.addEventListener("pointermove", function(e){
+      var rect = canvas.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width;
+      var y = 1 - (e.clientY - rect.top) / rect.height; // a espacio vUv (origen abajo)
+      mouseObjetivo.x = x;
+      mouseObjetivo.y = y;
+
+      var ahora = performance.now();
+      if (ultimoMouse) {
+        var dt = Math.max(ahora - ultimoTiempo, 1);
+        var dist = Math.hypot(x - ultimoMouse.x, y - ultimoMouse.y);
+        velObjetivo = clamp((dist / dt) * 1000 * 4, 0, 1);
+      }
+      ultimoMouse = { x: x, y: y };
+      ultimoTiempo = ahora;
+    });
+  }
+
+  // ---------- scroll: encoge el wordmark y sube la copy ----------
+  var escala = 1;
+  function alScroll(){
+    var rect = hero.getBoundingClientRect();
+    var alturaHero = hero.offsetHeight;
+    var avanzado = clamp(-rect.top, 0, alturaHero);
+    var progreso = alturaHero > 0 ? avanzado / alturaHero : 0;
+    escala = 1 - 0.35 * progreso;
+    heroCopy.style.transform = "translateY(" + (-avanzado * 0.15) + "px)";
+  }
+  window.addEventListener("scroll", alScroll, { passive: true });
+
+  // ---------- bucle ----------
+  var corriendo = true;   // pestaña visible
+  var enViewport = true;  // hero visible
+  var rafId = null;
+
+  var io = new IntersectionObserver(function(entradas){
+    enViewport = entradas[0].isIntersecting;
+    sincronizarBucle();
+  });
+  io.observe(hero);
+
+  document.addEventListener("visibilitychange", function(){
+    corriendo = document.visibilityState === "visible";
+    sincronizarBucle();
+  });
+
+  function sincronizarBucle(){
+    var debeCorrer = corriendo && enViewport;
+    if (debeCorrer && rafId === null) {
+      rafId = requestAnimationFrame(dibujar);
+    } else if (!debeCorrer && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  function dibujar(ahoraMs){
+    rafId = requestAnimationFrame(dibujar);
+    var t = ahoraMs / 1000;
+
+    if (video.readyState >= 2) {
+      gl.bindTexture(gl.TEXTURE_2D, texVideo);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
+    }
+
+    if (conHover) {
+      mouseActual.x = lerp(mouseActual.x, mouseObjetivo.x, 0.08);
+      mouseActual.y = lerp(mouseActual.y, mouseObjetivo.y, 0.08);
+      velObjetivo *= 0.94; // decae solo si el ratón deja de moverse
+      velActual = lerp(velActual, velObjetivo, 0.08);
+    } else {
+      // sin puntero fino (táctil): el hero "respira" solo, centrado
+      mouseActual.x = 0.5;
+      mouseActual.y = centerYUv;
+      velActual = 0.35 + 0.25 * Math.sin(t * 0.6);
+    }
+
+    gl.uniform1f(uTime, t);
+    gl.uniform2f(uMouse, mouseActual.x, mouseActual.y);
+    gl.uniform1f(uVel, velActual);
+    gl.uniform1f(uScale, escala);
+    gl.uniform1f(uCenterY, centerYUv);
+    gl.uniform1f(uAspectVideo, aspectVideo);
+    gl.uniform1f(uAspectCanvas, aspectCanvas);
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, texMask);
+    gl.uniform1i(uMask, 0);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, texVideo);
+    gl.uniform1i(uVideo, 1);
+
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+
+  sincronizarBucle();
+})();
+</script>
+</body>
+</html>

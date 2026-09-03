@@ -1,5 +1,6 @@
 .superpowers/
 node_modules/
+coverage/
 .DS_Store
 _verify.html
 brand/
