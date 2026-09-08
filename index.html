@@ -54,6 +54,13 @@
 
 <section class="hero" id="top" data-bg="gr" data-ink="claro">
   <canvas id="vz" aria-hidden="true"></canvas>
+  <div class="vz-movil" aria-hidden="true">
+    <video class="vz-movil-video" muted autoplay loop playsinline preload="metadata" poster="assets/hero-poster-v.webp"></video>
+    <svg class="vz-movil-mask" viewBox="0 0 390 600" preserveAspectRatio="xMidYMid slice">
+      <defs><mask id="vz-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="390" height="600"><rect width="390" height="600" fill="#fff"/><text x="195" y="230" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="250" letter-spacing="-0.06em" fill="#000">VZ</text></mask></defs>
+      <rect width="390" height="600" fill="#14161B" mask="url(#vz-mask)"/>
+    </svg>
+  </div>
 
   <!-- el src lo pone js/hero.js según orientación: el atributo media de source no se respeta aquí -->
   <video id="vz-src" muted autoplay loop playsinline preload="metadata" crossorigin="anonymous" poster="assets/hero-poster.webp" aria-hidden="true"></video>

@@ -5,8 +5,8 @@
 // Diferencias respecto al prototipo:
 //  - cyNorm en móvil es 0.30 (no 0.36): a partir de 700px de ancho la copy
 //    y el wordmark se pisaban con el valor original.
-//  - sin WebGL: añade la clase html.sin-webgl (la usa css/style.css para
-//    mostrar el fallback) además de quitar canvas y vídeo.
+//  - móvil / sin WebGL: ruta sin shader (ver usarMovil), vídeo real recortado
+//    con una máscara SVG del texto "VZ" — quita canvas y vídeo del shader.
 //  - uScale por scroll se mantiene igual que en el prototipo.
 
 const VERT = `
@@ -114,29 +114,55 @@ export function montarHero(hero) {
   const video = hero.querySelector('#vz-src');
   const vzStatic = hero.querySelector('.vz-static');
   const heroCopy = hero.querySelector('.hero-copy');
+  const vzMovil = hero.querySelector('.vz-movil');
+  const vzMovilVideo = vzMovil ? vzMovil.querySelector('.vz-movil-video') : null;
   if (!canvas || !video || !vzStatic || !heroCopy) return;
 
   const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // sin gancho de ratón real (táctil/trackpad sin hover): el shader "respira" solo
   const conHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const esMovil = window.matchMedia('(max-width: 700px)').matches;
+  // móvil o sin puntero fino: ruta sin WebGL (más ligera, y evita el shader que
+  // Chrome Android no arranca bien con un <video> 1px/opacity:0 como textura)
+  const esMovil = window.matchMedia('(max-width: 700px)').matches
+    || window.matchMedia('(hover: none)').matches;
 
   const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
   const lerp = (a, b, t) => a + (b - a) * t;
 
-  // reduced-motion o sin WebGL: nada de canvas/vídeo, solo el póster recortado en texto
+  // reduced-motion o markup incompleto: nada de canvas/vídeo, solo el póster recortado en texto
   function usarFallback() {
     canvas.remove();
     video.remove();
+    if (vzMovil) vzMovil.remove();
     vzStatic.style.display = 'block';
   }
 
+  // ruta móvil: vídeo real dentro de las letras "VZ" recortadas con una máscara SVG
+  function usarMovil() {
+    canvas.remove();
+    video.remove();
+    if (!vzMovil || !vzMovilVideo) { usarFallback(); return; }
+
+    const activar = () => document.documentElement.classList.add('hero-movil');
+    // espera la fuente real: si no, el SVG mediría/pintaría con la fallback y saldría mal
+    document.fonts.load('800 100px "Bricolage Grotesque"').then(activar).catch(activar);
+
+    const asignarSrc = () => {
+      vzMovilVideo.src = new URL('../assets/hero-loop-v.mp4', import.meta.url).href;
+      vzMovilVideo.play().catch(() => {});
+    };
+    if (document.readyState === 'complete') asignarSrc();
+    else window.addEventListener('load', asignarSrc, { once: true });
+    vzMovilVideo.addEventListener('canplay', () => vzMovilVideo.play().catch(() => {}), { once: true });
+    window.addEventListener('touchstart', () => vzMovilVideo.play().catch(() => {}), { once: true, passive: true });
+  }
+
   if (reducido) { usarFallback(); return; }
+  if (esMovil) { usarMovil(); return; }
 
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
   if (!gl) {
-    document.documentElement.classList.add('sin-webgl');
-    usarFallback();
+    usarMovil();
     return;
   }
 
@@ -207,9 +233,13 @@ export function montarHero(hero) {
     video.src = window.matchMedia('(orientation: portrait)').matches
       ? new URL('../assets/hero-loop-v.mp4', import.meta.url).href
       : new URL('../assets/hero-loop.mp4', import.meta.url).href;
+    // Chrome Android no arranca autoplay de un <video> 1px/opacity:0 sin un play() explícito
+    video.play().catch(() => {});
   };
   if (document.readyState === 'complete') cargarVideo();
   else window.addEventListener('load', cargarVideo, { once: true });
+  video.addEventListener('canplay', () => video.play().catch(() => {}), { once: true });
+  window.addEventListener('touchstart', () => video.play().catch(() => {}), { once: true, passive: true });
   video.addEventListener('loadedmetadata', function () {
     if (video.videoWidth && video.videoHeight) {
       aspectVideo = video.videoWidth / video.videoHeight;
