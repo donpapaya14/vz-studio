@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.vladys.vz-guias</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/vladys/Proyectos/vz-web/bin/publicar-guia.sh</string>
+    </array>
+
+    <!-- Lunes a las 11:00. Las 15:00 y las 19:00 son red de seguridad por si a
+         las 11:00 el Mac estaba apagado o el WiFi no habia asociado todavia:
+         la marca logs/.ultima_guia (semana ISO) evita la guia duplicada.
+         El script NO publica: deja la guia en una rama guias/AAAA-MM-DD. -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>11</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>15</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>19</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/vladys/Proyectos/vz-web</string>
+
+    <key>StandardOutPath</key>
+    <string>/Users/vladys/Proyectos/vz-web/logs/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/vladys/Proyectos/vz-web/logs/launchd.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>

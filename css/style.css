@@ -526,3 +526,143 @@ section[data-bg="crema"] .plate figcaption .b{color:var(--tinta);font-weight:600
 }
 .legal-foot a{margin:0 8px;color:var(--ink2)}
 .legal-foot a:hover{color:var(--ink)}
+
+/* ============================================================
+   páginas de contenido: casos, guías y diagnóstico
+   Reutilizan los tokens y las clases de la home (.wrap, .tag, .btn).
+   body.doc = página de documento: fondo fijo, sin efecto hoja.
+   ============================================================ */
+body.doc{background:var(--gr);color:var(--ink)}
+body.doc main{padding-top:104px}
+
+.prosa-wrap,.listado-wrap{max-width:780px;margin:0 auto;padding:44px var(--pad) 96px}
+.prosa-head{margin-bottom:44px}
+.prosa-head .volver{
+  display:inline-block;margin-bottom:26px;font-family:var(--mono);font-size:12.5px;
+  letter-spacing:.08em;color:var(--ink2);
+}
+.prosa-head .volver:hover{color:var(--verde)}
+.prosa-head h1{
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.04;
+  font-size:clamp(32px,5.4vw,54px);margin:14px 0 18px;
+}
+.prosa-head .entradilla{font-size:19px;line-height:1.55;color:var(--ink2);max-width:60ch}
+.prosa-meta{
+  margin-top:22px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink2);
+}
+.prosa-meta .sep{margin:0 10px;opacity:.5}
+
+/* el cuerpo del artículo: medida corta y jerarquía clara */
+.prosa{font-size:18px;line-height:1.72;color:var(--ink2)}
+.prosa > *{max-width:68ch}
+.prosa h2,.prosa h3,.prosa h4{scroll-margin-top:96px}
+.prosa h2{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.15;
+  font-size:clamp(24px,3.2vw,31px);color:var(--ink);margin:52px 0 16px;max-width:none;
+}
+.prosa h3{
+  font-family:var(--display);font-weight:700;font-size:21px;line-height:1.3;color:var(--ink);
+  margin:36px 0 12px;max-width:none;
+}
+.prosa h4{font-weight:600;font-size:18px;color:var(--ink);margin:28px 0 10px}
+.prosa p{margin-bottom:20px}
+.prosa strong{color:var(--ink);font-weight:600}
+.prosa ul,.prosa ol{margin:0 0 22px 24px}
+.prosa li{margin-bottom:9px}
+.prosa a{color:var(--verde);border-bottom:1px solid rgba(198,255,61,.35)}
+.prosa a:hover{border-bottom-color:var(--verde)}
+.prosa code{
+  font-family:var(--mono);font-size:.88em;background:rgba(236,238,242,.07);
+  border:1px solid var(--line);border-radius:3px;padding:2px 6px;color:var(--ink);
+}
+.prosa blockquote{
+  border-left:2px solid var(--verde);padding:4px 0 4px 22px;margin:28px 0;
+  color:var(--ink);
+}
+.prosa blockquote p{margin:0}
+.prosa table{
+  width:100%;max-width:none;border-collapse:collapse;margin:28px 0;font-size:16px;
+  display:block;overflow-x:auto;
+}
+.prosa th,.prosa td{
+  text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+.prosa th{
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink2);white-space:nowrap;
+}
+.prosa td{color:var(--ink2)}
+
+.prosa-cta{
+  margin-top:64px;padding:34px;border:1px solid var(--line);border-radius:10px;
+  background:rgba(236,238,242,.03);
+}
+.prosa-cta h2{font-family:var(--display);font-weight:700;font-size:23px;line-height:1.25;color:var(--ink);margin-bottom:10px;max-width:none}
+.prosa-cta p{color:var(--ink2);margin-bottom:22px;max-width:52ch}
+.prosa-cta .acciones{display:flex;gap:12px;flex-wrap:wrap}
+
+/* índices: lista completa, sin paginación */
+.listado{display:grid;gap:2px;margin-top:8px}
+.listado .item a{
+  display:block;padding:28px 0;border-top:1px solid var(--line);
+}
+.listado .item:last-child a{border-bottom:1px solid var(--line)}
+.listado .item h2{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.18;
+  font-size:clamp(21px,2.6vw,27px);color:var(--ink);margin:12px 0 10px;max-width:none;
+}
+.listado .item p{color:var(--ink2);font-size:16.5px;max-width:62ch;margin-bottom:12px}
+.listado .item time{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink2);opacity:.75;
+}
+.listado .item a:hover h2{color:var(--verde)}
+
+/* diagnóstico */
+.diag{max-width:720px;margin:0 auto;padding:44px var(--pad) 96px}
+.diag-paso{display:none}
+.diag-paso.activo{display:block}
+.diag-progreso{
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink2);margin-bottom:20px;
+}
+.diag-barra{height:2px;background:var(--line);margin-bottom:38px;overflow:hidden}
+.diag-barra i{display:block;height:100%;background:var(--verde);width:0;transition:width .35s ease}
+.diag h2{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.2;
+  font-size:clamp(23px,3.4vw,32px);color:var(--ink);margin-bottom:12px;max-width:none;
+}
+/* el foco en el titular es programatico (lector de pantalla), no una accion del
+   usuario: el anillo confundiria mas que ayudaria. El teclado sigue viendo el
+   suyo en botones y enlaces, que son lo que de verdad se navega. */
+.diag h2[tabindex]:focus{outline:none}
+.diag .ayuda{color:var(--ink2);font-size:16px;margin-bottom:28px;max-width:56ch}
+.diag-opciones{display:grid;gap:10px}
+.diag-op{
+  display:block;width:100%;text-align:left;padding:17px 20px;font:inherit;font-size:17px;
+  color:var(--ink);background:rgba(236,238,242,.03);border:1px solid var(--line);
+  border-radius:8px;cursor:pointer;transition:border-color .18s,background .18s;
+}
+.diag-op:hover{border-color:var(--verde);background:rgba(198,255,61,.07)}
+.diag-atras{
+  margin-top:26px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;
+  color:var(--ink2);background:none;border:0;cursor:pointer;padding:0;
+}
+.diag-atras:hover{color:var(--verde)}
+
+.diag-res .cifras{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin:30px 0 34px}
+.diag-res .cifra{padding:26px;border:1px solid var(--line);border-radius:10px;background:rgba(236,238,242,.03)}
+.diag-res .cifra .v{
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1;
+  font-size:clamp(34px,6vw,52px);color:var(--verde);display:block;
+}
+.diag-res .cifra .k{
+  display:block;margin-top:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink2);
+}
+.diag-res .nota{font-size:15px;color:var(--ink2);opacity:.85;max-width:60ch;margin-bottom:28px}
+.diag-res .acciones{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:620px){.diag-res .cifras{grid-template-columns:1fr}}
+
+@media(prefers-reduced-motion:reduce){.diag-barra i{transition:none}}

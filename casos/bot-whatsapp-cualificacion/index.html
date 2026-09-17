@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un agente de IA que atiende WhatsApp y cualifica solo · VZ Studio</title>
+<meta name="description" content="Bot de ventas en producción sobre WhatsApp Cloud API: entiende audios, cualifica, agenda y registra la baja. Lo que aprendí montándolo para varios clientes.">
+<link rel="canonical" href="https://vzstudio.dev/casos/bot-whatsapp-cualificacion/">
+<meta property="og:title" content="Un agente de IA que atiende WhatsApp y cualifica solo">
+<meta property="og:description" content="Bot de ventas en producción sobre WhatsApp Cloud API: entiende audios, cualifica, agenda y registra la baja. Lo que aprendí montándolo para varios clientes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vzstudio.dev/casos/bot-whatsapp-cualificacion/">
+<meta property="og:image" content="https://vzstudio.dev/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14161B">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Un agente de IA que atiende WhatsApp y cualifica solo",
+      "description": "Bot de ventas en producción sobre WhatsApp Cloud API: entiende audios, cualifica, agenda y registra la baja. Lo que aprendí montándolo para varios clientes.",
+      "datePublished": "2026-07-30",
+      "dateModified": "2026-07-30",
+      "inLanguage": "es-ES",
+      "mainEntityOfPage": "https://vzstudio.dev/casos/bot-whatsapp-cualificacion/",
+      "author": {
+        "@type": "Person",
+        "name": "Vladyslav Zinkevych",
+        "url": "https://vzstudio.dev/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "VZ Studio",
+        "url": "https://vzstudio.dev/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://vzstudio.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Casos",
+          "item": "https://vzstudio.dev/casos/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Un agente de IA que atiende WhatsApp y cualifica solo",
+          "item": "https://vzstudio.dev/casos/bot-whatsapp-cualificacion/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="doc">
+
+<nav class="nav" id="nav">
+  <div class="row">
+    <a class="brand" href="../../"><svg viewBox="0 0 120 124" fill="none" aria-label="VZ"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg><span class="bn">VZ Studio</span></a>
+    <div class="nlinks">
+      <a href="../../#automatizacion">Automatización</a>
+      <a href="../../#rediseno">Rediseño</a>
+      <a href="../../casos/">Casos</a>
+      <a href="../../guias/">Guías</a>
+      <a href="../../diagnostico/">Diagnóstico</a>
+      <a class="cta" href="../../#contacto">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<article class="prosa-wrap">
+  <header class="prosa-head">
+    <a class="volver" href="../../casos/">← Todos los casos</a>
+    <span class="tag">Agentes de IA</span>
+    <h1>Un agente de IA que atiende WhatsApp y cualifica solo</h1>
+    <p class="entradilla">Bot de ventas en producción sobre WhatsApp Cloud API: entiende audios, cualifica, agenda y registra la baja. Lo que aprendí montándolo para varios clientes.</p>
+    <p class="prosa-meta"><time datetime="2026-07-30">30 de julio de 2026</time><span class="sep">·</span><span>6 min de lectura</span><span class="sep">·</span><span>Varios clientes, sector inmobiliario y servicios</span></p>
+  </header>
+  <div class="prosa">
+<h2 id="el-problema">El problema</h2>
+<p>Una empresa con captación activa recibe mensajes a cualquier hora. El patrón se repite en todos los sectores que he tocado:</p>
+<ul><li>El 70 % de lo que entra son las mismas cinco preguntas.</li><li>Lo que llega fuera de horario se contesta al día siguiente, si alguien se</li></ul>
+<p>acuerda.</p>
+<ul><li>Nadie sabe cuántos contactos se perdieron, porque no se registran los que no</li></ul>
+<p>se contestaron.</p>
+<p>Y la consecuencia menos obvia: el comercial gasta su mejor tiempo filtrando gente que nunca iba a comprar, en vez de hablando con quien sí.</p>
+<h2 id="que-se-construyo">Qué se construyó</h2>
+<p>Un agente sobre <strong>WhatsApp Cloud API</strong> con n8n en servidor propio. No es un árbol de botones: entiende lenguaje normal, y también audios, que es como escribe media España.</p>
+<p><strong>Cualifica antes de pasar el contacto.</strong> Pregunta lo que el comercial preguntaría —presupuesto, zona, plazo— y solo escala cuando hay algo real.</p>
+<p><strong>Agenda solo.</strong> Si el contacto encaja, propone hueco y lo escribe en el calendario.</p>
+<p><strong>Registra la baja antes de prometerla.</strong> Este detalle costó una iteración: si alguien dice que no le escriban, el sistema marca la baja en base de datos <strong>antes</strong> de contestar &quot;listo, no te escribo más&quot;. Al revés, si algo falla entre medias, prometes una cosa y haces la contraria.</p>
+<p><strong>Se le nota humano.</strong> Burbujas separadas en vez de un ladrillo, confirmación de lectura, escribiendo… y emoji con sentido. La diferencia en respuesta entre un bot que parece formulario y uno que parece persona es grande.</p>
+<h2 id="los-tropiezos-que-valen-para-cualquiera">Los tropiezos que valen para cualquiera</h2>
+<p><strong>Una app de Meta = un solo webhook.</strong> Si tienes varios números de WhatsApp conviviendo, no puedes darle a cada uno su destino: hay que enrutar por <code>phone_number_id</code> dentro del flujo. Se descubre tarde y duele.</p>
+<p><strong>Los audios llegan de otro dominio.</strong> Meta sirve los ficheros desde <code>lookaside.fbsbx.com</code>, no desde <code>graph.facebook.com</code>, y si la credencial solo permite el segundo, el audio falla con un &quot;Domain not allowed&quot; que no explica nada.</p>
+<p><strong>Reintentar un error de cuota lo empeora.</strong> Cuando Meta devuelve el error de límite de aplicación, volver a intentarlo perpetúa el bloqueo en vez de arreglarlo.</p>
+<p><strong>Un debounce mal hecho deja al modelo sin la pregunta.</strong> Si agrupas mensajes &quot;desde la última respuesta&quot;, en una carrera puedes perder justo el mensaje que disparó la ejecución: al modelo le llega vacío y vuelve al guion desde el principio. Cuando un bot repite preguntas, mira primero <strong>qué entró al modelo</strong>, no el prompt.</p>
+<h2 id="que-cambio">Qué cambió</h2>
+<p>El bot está <strong>vivo en producción</strong> desde julio de 2026 y sigue funcionando. Hay un segundo sistema encima que audita las conversaciones y avisa por Telegram cuando algo se sale de lo esperado, porque un bot sin vigilancia es un bot que se rompe en silencio un domingo.</p>
+<p>No publico volúmenes de conversación ni tasas de conversión: son datos de clientes y no me corresponde enseñarlos.</p>
+<h2 id="lo-que-me-llevo">Lo que me llevo</h2>
+<p>Que la parte difícil de un agente <strong>no es la IA</strong>. Es la fontanería: qué pasa cuando el audio no baja, cuando Meta devuelve un error raro, cuando dos mensajes llegan a la vez. El modelo funciona a la primera; lo demás es lo que te tiene una semana.</p>
+  </div>
+  <aside class="prosa-cta">
+    <h2>¿Te pasa algo parecido?</h2>
+    <p>Cuéntamelo en dos líneas y te digo si tiene arreglo y cuánto cuesta. Sin compromiso.</p>
+    <div class="acciones">
+      <a class="btn btn-solid" href="https://wa.me/34722736832">Escríbeme por WhatsApp</a>
+      <a class="btn btn-ghost" href="../../diagnostico/">Calcular lo que pierdo</a>
+    </div>
+  </aside>
+</article>
+</main>
+
+<footer class="footer">
+  <div class="cols">
+    <div>
+      <span class="fh">VZ Studio</span>
+      <p class="colofon">Automatizaciones con n8n, agentes de IA y webs a medida. Murcia y Alicante, en remoto para toda España.</p>
+    </div>
+    <div>
+      <span class="fh">Contacto</span>
+      <ul>
+        <li><a href="mailto:vladys@vzstudio.dev">vladys@vzstudio.dev</a></li>
+        <li><a href="https://wa.me/34722736832">WhatsApp</a></li>
+        <li><a href="https://linkedin.com/in/vzstudio" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="fh">Secciones</span>
+      <ul>
+        <li><a href="../../">Inicio</a></li>
+        <li><a href="../../casos/">Casos</a></li>
+        <li><a href="../../guias/">Guías</a></li>
+        <li><a href="../../diagnostico/">Diagnóstico</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legalrow"><span>© 2026 VZ Studio · Vladys Z.</span><span>Murcia / Alicante, España</span></div>
+</footer>
+
+</body>
+</html>

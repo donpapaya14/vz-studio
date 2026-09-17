@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web y sistemas internos para una agencia de marketing · VZ Studio</title>
+<meta name="description" content="Web multipágina en Next.js con hero WebGL propio, más la infraestructura de automatización que mueve los datos de la agencia por dentro.">
+<link rel="canonical" href="https://vzstudio.dev/casos/aion-marketing/">
+<meta property="og:title" content="Web y sistemas internos para una agencia de marketing">
+<meta property="og:description" content="Web multipágina en Next.js con hero WebGL propio, más la infraestructura de automatización que mueve los datos de la agencia por dentro.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vzstudio.dev/casos/aion-marketing/">
+<meta property="og:image" content="https://vzstudio.dev/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14161B">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Web y sistemas internos para una agencia de marketing",
+      "description": "Web multipágina en Next.js con hero WebGL propio, más la infraestructura de automatización que mueve los datos de la agencia por dentro.",
+      "datePublished": "2026-09-04",
+      "dateModified": "2026-09-04",
+      "inLanguage": "es-ES",
+      "mainEntityOfPage": "https://vzstudio.dev/casos/aion-marketing/",
+      "author": {
+        "@type": "Person",
+        "name": "Vladyslav Zinkevych",
+        "url": "https://vzstudio.dev/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "VZ Studio",
+        "url": "https://vzstudio.dev/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://vzstudio.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Casos",
+          "item": "https://vzstudio.dev/casos/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Web y sistemas internos para una agencia de marketing",
+          "item": "https://vzstudio.dev/casos/aion-marketing/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="doc">
+
+<nav class="nav" id="nav">
+  <div class="row">
+    <a class="brand" href="../../"><svg viewBox="0 0 120 124" fill="none" aria-label="VZ"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg><span class="bn">VZ Studio</span></a>
+    <div class="nlinks">
+      <a href="../../#automatizacion">Automatización</a>
+      <a href="../../#rediseno">Rediseño</a>
+      <a href="../../casos/">Casos</a>
+      <a href="../../guias/">Guías</a>
+      <a href="../../diagnostico/">Diagnóstico</a>
+      <a class="cta" href="../../#contacto">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<article class="prosa-wrap">
+  <header class="prosa-head">
+    <a class="volver" href="../../casos/">← Todos los casos</a>
+    <span class="tag">Agencia digital</span>
+    <h1>Web y sistemas internos para una agencia de marketing</h1>
+    <p class="entradilla">Web multipágina en Next.js con hero WebGL propio, más la infraestructura de automatización que mueve los datos de la agencia por dentro.</p>
+    <p class="prosa-meta"><time datetime="2026-09-04">4 de septiembre de 2026</time><span class="sep">·</span><span>5 min de lectura</span><span class="sep">·</span><span>AION Marketing &amp; IA</span></p>
+  </header>
+  <div class="prosa">
+<h2 id="el-problema">El problema</h2>
+<p>AION vende marketing, paid media e IA. Una agencia que vende IA tiene un problema particular: <strong>su propia web es el primer examen</strong>. Si el sitio de quien te va a montar el sistema parece una plantilla, la conversación empieza cuesta arriba.</p>
+<p>Además tenían el problema clásico de agencia por dentro: los datos de campañas en una herramienta, los leads en otra, los informes a mano cada mes.</p>
+<h2 id="que-se-construyo">Qué se construyó</h2>
+<p><strong>La web.</strong> Plataforma multipágina en Next.js con página de producto propia para su sistema de IA y casos de éxito con métricas reales. La home lleva una firma visual programada: la <strong>Λ de la marca como máscara WebGL</strong> sobre vídeo, un shader escrito a medida. No es un efecto de librería: es el logotipo convertido en el propio elemento gráfico.</p>
+<p>Ese mismo motor se reutilizó después en las fotos del equipo, así que la firma visual es coherente en todo el sitio y no costó volver a programarla.</p>
+<p><strong>Los sistemas internos.</strong> Por debajo, más de 50 flujos de automatización en n8n sobre servidor propio:</p>
+<ul><li>Datos de campañas de Meta Ads sincronizados a Notion todos los días, para 13</li></ul>
+<p>cuentas de cliente.</p>
+<ul><li>Leads de los formularios llegando al sitio correcto sin intermediarios de</li></ul>
+<p>pago.</p>
+<ul><li>Un vigilante que revisa cada cinco minutos que los flujos sigan vivos y</li></ul>
+<p>avisa por Telegram si algo se cae.</p>
+<p>Ese último punto es el que más veces ha salvado la semana. Un sistema automático sin vigilancia no falla menos: falla igual, pero te enteras cuando te lo dice el cliente.</p>
+<h2 id="como-se-entrego">Cómo se entregó</h2>
+<p>La web en Next.js sobre Vercel. La automatización en n8n autoalojado, que a este volumen sale mucho más barato que la versión en la nube y deja los datos de cliente en casa.</p>
+<h2 id="que-cambio">Qué cambió</h2>
+<p>La web está <strong>en producción</strong> en <code>aionmkt.com</code>. La infraestructura de automatización lleva meses funcionando y es hoy la que mueve el reporting interno de la agencia.</p>
+<p>Sobre cifras: los volúmenes de campaña son datos de sus clientes y no los voy a publicar. Lo que sí es comprobable es el número de flujos en producción y que el sistema de vigilancia avisa, porque ha avisado.</p>
+<h2 id="lo-que-me-llevo">Lo que me llevo</h2>
+<p>Que el trabajo que más valor da a una agencia <strong>no es el que se ve</strong>. La web abre puertas, pero lo que les cambió el día a día fue dejar de hacer informes a mano.</p>
+  </div>
+  <aside class="prosa-cta">
+    <h2>¿Te pasa algo parecido?</h2>
+    <p>Cuéntamelo en dos líneas y te digo si tiene arreglo y cuánto cuesta. Sin compromiso.</p>
+    <div class="acciones">
+      <a class="btn btn-solid" href="https://wa.me/34722736832">Escríbeme por WhatsApp</a>
+      <a class="btn btn-ghost" href="../../diagnostico/">Calcular lo que pierdo</a>
+    </div>
+  </aside>
+</article>
+</main>
+
+<footer class="footer">
+  <div class="cols">
+    <div>
+      <span class="fh">VZ Studio</span>
+      <p class="colofon">Automatizaciones con n8n, agentes de IA y webs a medida. Murcia y Alicante, en remoto para toda España.</p>
+    </div>
+    <div>
+      <span class="fh">Contacto</span>
+      <ul>
+        <li><a href="mailto:vladys@vzstudio.dev">vladys@vzstudio.dev</a></li>
+        <li><a href="https://wa.me/34722736832">WhatsApp</a></li>
+        <li><a href="https://linkedin.com/in/vzstudio" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="fh">Secciones</span>
+      <ul>
+        <li><a href="../../">Inicio</a></li>
+        <li><a href="../../casos/">Casos</a></li>
+        <li><a href="../../guias/">Guías</a></li>
+        <li><a href="../../diagnostico/">Diagnóstico</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legalrow"><span>© 2026 VZ Studio · Vladys Z.</span><span>Murcia / Alicante, España</span></div>
+</footer>
+
+</body>
+</html>

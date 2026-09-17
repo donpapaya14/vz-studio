@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>n8n o Make: cuál elegir para automatizar tu empresa · VZ Studio</title>
+<meta name="description" content="Comparativa práctica entre n8n y Make desde la experiencia de montar decenas de automatizaciones en producción. Cuándo compensa cada uno y cuándo ninguno.">
+<link rel="canonical" href="https://vzstudio.dev/guias/n8n-vs-make-cual-elegir/">
+<meta property="og:title" content="n8n o Make: cuál elegir para automatizar tu empresa">
+<meta property="og:description" content="Comparativa práctica entre n8n y Make desde la experiencia de montar decenas de automatizaciones en producción. Cuándo compensa cada uno y cuándo ninguno.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vzstudio.dev/guias/n8n-vs-make-cual-elegir/">
+<meta property="og:image" content="https://vzstudio.dev/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14161B">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "n8n o Make: cuál elegir para automatizar tu empresa",
+      "description": "Comparativa práctica entre n8n y Make desde la experiencia de montar decenas de automatizaciones en producción. Cuándo compensa cada uno y cuándo ninguno.",
+      "datePublished": "2026-09-18",
+      "dateModified": "2026-09-18",
+      "inLanguage": "es-ES",
+      "mainEntityOfPage": "https://vzstudio.dev/guias/n8n-vs-make-cual-elegir/",
+      "author": {
+        "@type": "Person",
+        "name": "Vladyslav Zinkevych",
+        "url": "https://vzstudio.dev/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "VZ Studio",
+        "url": "https://vzstudio.dev/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://vzstudio.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías",
+          "item": "https://vzstudio.dev/guias/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "n8n o Make: cuál elegir para automatizar tu empresa",
+          "item": "https://vzstudio.dev/guias/n8n-vs-make-cual-elegir/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="doc">
+
+<nav class="nav" id="nav">
+  <div class="row">
+    <a class="brand" href="../../"><svg viewBox="0 0 120 124" fill="none" aria-label="VZ"><path d="M22 26 L58 96 L94 26" stroke="currentColor" stroke-width="7" stroke-linejoin="miter"/><path d="M72 70 L98 70 L74 90 L98 90" stroke="currentColor" stroke-width="5.5" stroke-linejoin="miter"/></svg><span class="bn">VZ Studio</span></a>
+    <div class="nlinks">
+      <a href="../../#automatizacion">Automatización</a>
+      <a href="../../#rediseno">Rediseño</a>
+      <a href="../../casos/">Casos</a>
+      <a href="../../guias/">Guías</a>
+      <a href="../../diagnostico/">Diagnóstico</a>
+      <a class="cta" href="../../#contacto">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<article class="prosa-wrap">
+  <header class="prosa-head">
+    <a class="volver" href="../../guias/">← Todas las guías</a>
+    <span class="tag">Automatización</span>
+    <h1>n8n o Make: cuál elegir para automatizar tu empresa</h1>
+    <p class="entradilla">Comparativa práctica entre n8n y Make desde la experiencia de montar decenas de automatizaciones en producción. Cuándo compensa cada uno y cuándo ninguno.</p>
+    <p class="prosa-meta"><time datetime="2026-09-18">18 de septiembre de 2026</time><span class="sep">·</span><span>6 min de lectura</span></p>
+  </header>
+  <div class="prosa">
+<h2 id="la-diferencia-que-de-verdad-importa">La diferencia que de verdad importa</h2>
+<p>Las comparativas suelen enredarse con la lista de integraciones. Eso importa poco: los dos conectan con casi todo, y lo que falte se resuelve con una llamada HTTP.</p>
+<p>La diferencia real es otra: <strong>n8n puedes alojarlo tú, Make no.</strong></p>
+<p>De ahí sale todo lo demás.</p>
+<h2 id="como-cobran-que-es-donde-duele">Cómo cobran, que es donde duele</h2>
+<p><strong>Make cobra por operación.</strong> Cada paso de cada ejecución cuenta. Un flujo de diez pasos que corre mil veces al mes son diez mil operaciones. La factura crece con el uso, y crece rápido cuando el sistema funciona bien y lo usas más.</p>
+<p><strong>n8n autoalojado cobra por servidor.</strong> Un VPS de 5-10 € al mes aguanta muchísimo. Da igual si el flujo corre cien veces o cien mil: pagas lo mismo.</p>
+<p>Esa diferencia no se nota el primer mes. Se nota al sexto, cuando ya tienes quince automatizaciones corriendo.</p>
+<h2 id="cuando-elegir-make">Cuándo elegir Make</h2>
+<p>Sin ironía: hay casos claros donde Make es la respuesta correcta.</p>
+<ul><li><strong>No hay nadie técnico</strong> en la empresa y no lo va a haber.</li><li>Son <strong>pocas automatizaciones</strong> y de poco volumen.</li><li>Quieres montarlo tú mismo sin tocar un servidor.</li><li>Prefieres pagar más a cambio de que el mantenimiento no sea tu problema.</li></ul>
+<p>Make tiene mejor interfaz para alguien que empieza, y eso vale dinero.</p>
+<h2 id="cuando-elegir-n8n">Cuándo elegir n8n</h2>
+<ul><li><strong>Volumen</strong>: en cuanto las ejecuciones suben, el ahorro es grande.</li><li><strong>Datos sensibles</strong>: si mueves datos de clientes, tenerlos en tu servidor</li></ul>
+<p>simplifica mucho la conversación de protección de datos.</p>
+<ul><li><strong>Lógica complicada</strong>: n8n deja escribir JavaScript dentro del flujo, y hay</li></ul>
+<p>cosas que en bloques visuales son un infierno y en seis líneas de código son triviales.</p>
+<ul><li><strong>Quieres que el sistema sea tuyo</strong>: sin depender de que una empresa cambie</li></ul>
+<p>precios o cierre.</p>
+<h2 id="lo-que-aprendi-usando-n8n-en-produccion">Lo que aprendí usando n8n en producción</h2>
+<p><strong>Las ejecuciones se borran solas.</strong> Por defecto solo guarda unos días de historial. Eso significa que &quot;0 ejecuciones&quot; en un flujo <strong>no prueba que esté muerto</strong>: puede que simplemente haya pasado la poda. Me costó un susto entenderlo.</p>
+<p><strong>La zona horaria hay que fijarla.</strong> Si la instancia corre en UTC y programas algo &quot;a las 9&quot;, puede dispararse con horas de desfase. Se configura por flujo, y conviene hacerlo desde el principio.</p>
+<p><strong>Un flujo sin vigilancia es un flujo que fallará en silencio.</strong> Tengo siempre un flujo que vigila a los demás cada pocos minutos y avisa por Telegram. Es lo primero que monto en cualquier instancia nueva.</p>
+<p><strong>Cuidado con reintentar errores de cuota.</strong> Si un servicio te bloquea por exceso de llamadas, reintentar automáticamente perpetúa el bloqueo. Hay que distinguir el error que se arregla reintentando del que se empeora.</p>
+<h2 id="la-tercera-opcion-ninguno-de-los-dos">La tercera opción: ninguno de los dos</h2>
+<p>A veces la respuesta correcta es <strong>un script</strong>.</p>
+<p>Si lo que necesitas es una cosa concreta que corre una vez al día y nadie más va a tocar, un programa de treinta líneas en el servidor es más fiable, más barato y más fácil de entender que un flujo visual.</p>
+<p>Las herramientas visuales brillan cuando hay <strong>muchas integraciones</strong> y alguien no técnico tiene que ver qué está pasando. Para una tarea aislada, suelen ser más complicación que ayuda.</p>
+<h2 id="resumen">Resumen</h2>
+<table><thead><tr><th>Situación</th><th>Elige</th></tr></thead><tbody><tr><td>Sin perfil técnico, poco volumen</td><td>Make</td></tr><tr><td>Volumen alto o creciente</td><td>n8n autoalojado</td></tr><tr><td>Datos personales de clientes</td><td>n8n autoalojado</td></tr><tr><td>Lógica complicada</td><td>n8n</td></tr><tr><td>Una sola tarea, sin integraciones</td><td>Un script</td></tr></tbody></table>
+  </div>
+  <aside class="prosa-cta">
+    <h2>¿Te pasa algo parecido?</h2>
+    <p>Cuéntamelo en dos líneas y te digo si tiene arreglo y cuánto cuesta. Sin compromiso.</p>
+    <div class="acciones">
+      <a class="btn btn-solid" href="https://wa.me/34722736832">Escríbeme por WhatsApp</a>
+      <a class="btn btn-ghost" href="../../diagnostico/">Calcular lo que pierdo</a>
+    </div>
+  </aside>
+</article>
+</main>
+
+<footer class="footer">
+  <div class="cols">
+    <div>
+      <span class="fh">VZ Studio</span>
+      <p class="colofon">Automatizaciones con n8n, agentes de IA y webs a medida. Murcia y Alicante, en remoto para toda España.</p>
+    </div>
+    <div>
+      <span class="fh">Contacto</span>
+      <ul>
+        <li><a href="mailto:vladys@vzstudio.dev">vladys@vzstudio.dev</a></li>
+        <li><a href="https://wa.me/34722736832">WhatsApp</a></li>
+        <li><a href="https://linkedin.com/in/vzstudio" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="fh">Secciones</span>
+      <ul>
+        <li><a href="../../">Inicio</a></li>
+        <li><a href="../../casos/">Casos</a></li>
+        <li><a href="../../guias/">Guías</a></li>
+        <li><a href="../../diagnostico/">Diagnóstico</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legalrow"><span>© 2026 VZ Studio · Vladys Z.</span><span>Murcia / Alicante, España</span></div>
+</footer>
+
+</body>
+</html>
