@@ -18,7 +18,7 @@ esperar_red() {
   local fin=$(( $(date +%s) + VZ_NET_ESPERA ))
   local intentos=0
   while true; do
-    if eval "$COACH_NET_CHECK" >/dev/null 2>&1; then
+    if eval "$VZ_NET_CHECK" >/dev/null 2>&1; then
       echo "$intentos"
       return 0
     fi
