@@ -9,7 +9,10 @@
 #
 # Configurable por entorno para poder probarlo sin red real.
 
-: "${VZ_NET_CHECK:=curl -sSf -m 5 -o /dev/null https://api.anthropic.com/v1}"
+# Sin -f a proposito: la API responde 401 sin credenciales y -f lo trataria como
+# fallo, asi que nunca habria "red lista". Aqui solo interesa que DNS resuelva y
+# la conexion TLS se establezca.
+: "${VZ_NET_CHECK:=curl -sS -m 5 -o /dev/null https://api.anthropic.com/v1}"
 : "${VZ_NET_ESPERA:=600}"   # segundos maximos esperando a la red
 : "${VZ_NET_PAUSA:=15}"     # segundos entre intentos
 
