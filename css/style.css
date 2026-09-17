@@ -75,6 +75,14 @@ section[data-bg="verde"]{background:var(--verde)}
 section[data-bg]{position:relative}
 section[data-ink="oscuro"] .hl{color:#4E6B00}
 
+/* ---------- efecto "hoja": la sección siguiente sube y tapa a la actual ---------- */
+/* top real lo calcula js/fx/hoja.js (más alta que el viewport → se queda pegada por abajo) */
+section[data-hoja]{position:sticky;top:0;will-change:transform;transform-origin:center top}
+main > section:not(:first-child){border-radius:28px 28px 0 0;box-shadow:0 -18px 60px rgba(0,0,0,.35)}
+@media(prefers-reduced-motion:reduce){
+  section[data-hoja]{position:relative}
+}
+
 /* ---------- texto utilitario ---------- */
 .tag{
   display:block;font-family:var(--mono);font-size:12.5px;font-weight:500;
@@ -149,6 +157,17 @@ h3{font-family:var(--display);font-weight:700;font-size:28px;line-height:1.1}
 /* el vídeo solo alimenta la textura del shader: no se ve como elemento HTML */
 #vz-src{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 
+/* ruta móvil sin WebGL: vídeo real recortado con una máscara SVG del texto "VZ" */
+.vz-movil{display:none;position:absolute;inset:0;z-index:0}
+.vz-movil-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vz-movil-mask{position:absolute;inset:0;width:100%;height:100%}
+html.hero-movil .vz-movil{display:block}
+html.hero-movil #vz,html.hero-movil #vz-src{display:none}
+@media(prefers-reduced-motion:no-preference){
+  .vz-movil-video{animation:vzRespira 6s ease-in-out infinite alternate}
+}
+@keyframes vzRespira{from{transform:scale(1)}to{transform:scale(1.04)}}
+
 .hero-copy{position:absolute;left:var(--pad);bottom:9vh;max-width:640px;z-index:2}
 .hero-copy .tag{margin-bottom:18px}
 .hero-copy h1{color:var(--ink)}
@@ -188,6 +207,7 @@ html.sin-webgl .vz-static{display:block}
 
 @media(max-width:700px){
   .hero-copy h1{font-size:clamp(36px,10vw,48px)}
+  .hero-copy{bottom:6vh}
   .vz-static{top:30%}
   .hero-estado{display:none} /* sin sitio en móvil sin pisar la copy */
 }
@@ -273,14 +293,32 @@ html.sin-webgl .vz-static{display:block}
 @media(max-width:860px){.cases{grid-template-columns:1fr;gap:48px}}
 .case{display:flex;flex-direction:column;gap:18px}
 .case .case-t{padding-bottom:4px}
-/* caso impar: ocupa las dos columnas y pone antes/después en paralelo */
+/* caso impar: el escenario de cortina ocupa las dos columnas */
 @media(min-width:861px){
   .case.wide{display:grid;grid-column:1/-1;grid-template-columns:1fr 1fr;gap:18px clamp(26px,4vw,48px);align-items:start}
-  .case.wide .case-t{grid-column:1/-1}
+  .case.wide .case-t,.case.wide .cortina,.case.wide .cortina-pie{grid-column:1/-1}
 }
-/* láminas uniformes: mismo tamaño antes/después en ambos casos */
-.case .plate .frame{aspect-ratio:16/9}
-.case .plate .frame img,.case .plate .frame video{width:100%;height:100%;object-fit:cover;object-position:top center}
+
+/* cortina antes/después: un solo escenario, el después se revela con clip-path */
+.cortina{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line2);background:#1B1E24;border-radius:4px;cursor:ew-resize;touch-action:pan-y}
+.cortina-antes,.cortina-despues{position:absolute;inset:0}
+.cortina-antes img,.cortina-antes video,.cortina-despues img,.cortina-despues video{width:100%;height:100%;object-fit:cover;object-position:top center}
+.cortina-despues{clip-path:inset(0 0 0 var(--corte,50%))}
+.cortina-linea{position:absolute;top:0;bottom:0;left:var(--corte,50%);width:2px;background:var(--verde);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.cortina-tag{
+  position:absolute;bottom:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 10px;background:rgba(10,11,14,.75);color:#ECEEF2;
+}
+.cortina-tag-a{left:12px}
+.cortina-tag-b{right:12px;color:var(--verde)}
+.cortina-pie{
+  display:flex;justify-content:space-between;gap:12px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);
+}
+.cortina-pie .a{color:var(--ink2)}
+.cortina-pie .b{color:var(--verde)}
+section[data-bg="crema"] .cortina-pie .b{color:var(--tinta);font-weight:600}
+
 .plate{margin:0;position:relative}
 .plate .frame{border:1px solid var(--line2);background:#1B1E24;overflow:hidden;border-radius:4px}
 .plate .frame img,.plate .frame video{width:100%;height:auto}
@@ -357,10 +395,10 @@ section[data-bg="crema"] .plate figcaption .b{color:var(--tinta);font-weight:600
   transition:background .25s,color .25s;
 }
 .svc-item:last-child{border-bottom:1px solid var(--line)}
-.svc-item:hover{background:var(--ink);color:var(--s-bg)}
-.svc-item:hover h3,.svc-item:hover p{color:inherit}
+.svc-item:hover{background:var(--ink);color:var(--humo)}
+.svc-item:hover h3,.svc-item:hover p{color:var(--humo)}
 .svc-item h3{font-size:clamp(28px,3.4vw,44px)}
-.svc-item p{font-size:16.5px;line-height:1.6;color:var(--ink2);max-width:56ch}
+.svc-item p{font-size:18px;line-height:1.6;color:var(--ink2);max-width:56ch}
 @media(max-width:760px){
   .svc-item{grid-template-columns:1fr;row-gap:10px;padding:28px 0}
 }

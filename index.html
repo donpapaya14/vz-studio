@@ -21,9 +21,76 @@
 <link rel="preload" href="fonts/plexmono-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <noscript><link rel="stylesheet" href="css/noscript.css"></noscript>
+<link rel="canonical" href="https://vzstudio.dev/">
 <link rel="alternate" hreflang="es" href="https://vzstudio.dev/">
 <link rel="alternate" hreflang="en" href="https://vzstudio.dev/en/">
 <link rel="alternate" hreflang="x-default" href="https://vzstudio.dev/">
+
+<!-- Datos estructurados. Sin esto Google no sabe que esto es un negocio de
+     servicios con zona geográfica: solo ve una página suelta. El @id con
+     almohadilla permite referenciar las entidades entre sí. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://vzstudio.dev/#negocio",
+      "name": "VZ Studio",
+      "alternateName": "VZ Studio · Vladys Z",
+      "url": "https://vzstudio.dev/",
+      "image": "https://vzstudio.dev/assets/og.jpg",
+      "logo": "https://vzstudio.dev/favicon.svg",
+      "email": "vladys@vzstudio.dev",
+      "telephone": "+34722736832",
+      "priceRange": "€€",
+      "description": "Automatizaciones con n8n, agentes de IA por WhatsApp e Instagram, y webs a medida con Next.js y Astro.",
+      "founder": { "@id": "https://vzstudio.dev/#vladys" },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Región de Murcia" },
+        { "@type": "AdministrativeArea", "name": "Alicante" },
+        { "@type": "Country", "name": "España" }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Región de Murcia",
+        "addressCountry": "ES"
+      },
+      "sameAs": ["https://www.linkedin.com/in/vzstudio"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización de procesos con n8n", "description": "Sistemas que conectan tus herramientas y ejecutan el trabajo repetitivo sin intervención." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Agentes de IA para WhatsApp e Instagram", "description": "Atienden, cualifican y agendan 24/7." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Diseño y desarrollo web", "description": "Webs y landings a medida con Next.js y Astro." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rediseño de webs", "description": "Reconstrucción de webs antiguas para que vendan y carguen rápido." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Integraciones con CRM y ERP", "description": "Leads, avisos e informes conectados entre sistemas." } }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://vzstudio.dev/#vladys",
+      "name": "Vladyslav Zinkevych",
+      "jobTitle": "Desarrollador AI-first",
+      "email": "vladys@vzstudio.dev",
+      "url": "https://vzstudio.dev/",
+      "worksFor": { "@id": "https://vzstudio.dev/#negocio" },
+      "knowsAbout": ["n8n", "Automatización de procesos", "Agentes de IA", "Next.js", "Astro", "React", "TypeScript", "Supabase"],
+      "sameAs": ["https://www.linkedin.com/in/vzstudio"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://vzstudio.dev/#web",
+      "url": "https://vzstudio.dev/",
+      "name": "VZ Studio",
+      "inLanguage": "es-ES",
+      "publisher": { "@id": "https://vzstudio.dev/#negocio" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -52,7 +119,7 @@
 
 <main>
 
-<section class="hero" id="top" data-bg="gr" data-ink="claro">
+<section class="hero" id="top" data-bg="gr" data-ink="claro" data-hoja>
   <canvas id="vz" aria-hidden="true"></canvas>
   <div class="vz-movil" aria-hidden="true">
     <video class="vz-movil-video" muted autoplay loop playsinline preload="metadata" poster="assets/hero-poster-v.webp"></video>
@@ -81,7 +148,7 @@
   <div class="vz-static" aria-hidden="true">VZ</div>
 </section>
 
-<section class="auto" id="automatizacion" data-bg="gr2" data-ink="claro">
+<section class="auto" id="automatizacion" data-bg="gr2" data-ink="claro" data-hoja>
   <div class="scrub-wrap">
     <canvas class="scrub" data-carpeta="assets/scrub" data-n="72" data-res="640,1280" aria-hidden="true"></canvas>
   </div>
@@ -146,7 +213,7 @@
   </div>
 </section>
 
-<section class="redo" id="rediseno" data-bg="crema" data-ink="oscuro">
+<section class="redo" id="rediseno" data-bg="crema" data-ink="oscuro" data-hoja>
   <div class="wrap">
     <div class="shead rv">
       <span class="tag">Rediseño</span>
@@ -161,58 +228,53 @@
     <div class="cases">
       <div class="case rv">
         <span class="tag case-t">costaehijos.es — industria</span>
-        <figure class="plate">
-          <div class="frame"><picture><source srcset="assets/costa-old.webp" type="image/webp"><img src="assets/costa-old.jpg" alt="Antonio Costa e Hijos — web antigua en WordPress" loading="lazy" width="1400" height="704"></picture></div>
-          <figcaption><span class="a">Antes — WordPress genérico</span></figcaption>
-        </figure>
-        <figure class="plate">
-          <div class="frame"><video data-src="assets/costa-new.mp4" data-poster="assets/costa-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1440" height="819" aria-label="Antonio Costa e Hijos — rediseño con fondo animado"></video></div>
-          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
-        </figure>
+        <div class="cortina" data-cortina>
+          <div class="cortina-antes"><picture><source srcset="assets/costa-old.webp" type="image/webp"><img src="assets/costa-old.jpg" alt="Antonio Costa e Hijos — web antigua en WordPress" loading="lazy" width="1400" height="704"></picture></div>
+          <div class="cortina-despues"><video data-src="assets/costa-new.mp4" data-poster="assets/costa-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1440" height="819" aria-label="Antonio Costa e Hijos — rediseño con fondo animado"></video></div>
+          <div class="cortina-linea" aria-hidden="true"></div>
+          <span class="cortina-tag cortina-tag-a">Antes</span><span class="cortina-tag cortina-tag-b">Después</span>
+        </div>
+        <p class="cortina-pie"><span class="a">Antes — WordPress genérico</span><span class="b">Después — rediseño VZ, en producción</span></p>
       </div>
       <div class="case rv rv2">
         <span class="tag case-t">loyalcapitaladvisors.com — finanzas</span>
-        <figure class="plate">
-          <div class="frame"><picture><source srcset="assets/loyal-old.webp" type="image/webp"><img src="assets/loyal-old.jpg" alt="Loyal Capital — web antigua en WordPress" loading="lazy" width="1200" height="750"></picture></div>
-          <figcaption><span class="a">Antes — WordPress</span></figcaption>
-        </figure>
-        <figure class="plate">
-          <div class="frame"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img src="assets/work-loyal.jpg" alt="Loyal Capital — rediseño actual" loading="lazy" width="1200" height="750"></picture></div>
-          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
-        </figure>
+        <div class="cortina" data-cortina>
+          <div class="cortina-antes"><picture><source srcset="assets/loyal-old.webp" type="image/webp"><img src="assets/loyal-old.jpg" alt="Loyal Capital — web antigua en WordPress" loading="lazy" width="1200" height="750"></picture></div>
+          <div class="cortina-despues"><picture><source srcset="assets/work-loyal.webp" type="image/webp"><img src="assets/work-loyal.jpg" alt="Loyal Capital — rediseño actual" loading="lazy" width="1200" height="750"></picture></div>
+          <div class="cortina-linea" aria-hidden="true"></div>
+          <span class="cortina-tag cortina-tag-a">Antes</span><span class="cortina-tag cortina-tag-b">Después</span>
+        </div>
+        <p class="cortina-pie"><span class="a">Antes — WordPress</span><span class="b">Después — rediseño VZ, en producción</span></p>
       </div>
       <div class="case rv">
         <span class="tag case-t">comaskeys.com — inmobiliaria</span>
-        <figure class="plate">
-          <div class="frame"><picture><source srcset="assets/comaskeys-old.webp" type="image/webp"><img src="assets/comaskeys-old.jpg" alt="Comaskey Spanish Properties — web antigua, plantilla genérica" loading="lazy" width="1280" height="802"></picture></div>
-          <figcaption><span class="a">Antes — plantilla genérica</span></figcaption>
-        </figure>
-        <figure class="plate">
-          <div class="frame"><video data-src="assets/comaskeys-new.mp4" data-poster="assets/comaskeys-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1280" height="802" aria-label="Comaskeys — rediseño con hero animado"></video></div>
-          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
-        </figure>
+        <div class="cortina" data-cortina>
+          <div class="cortina-antes"><picture><source srcset="assets/comaskeys-old.webp" type="image/webp"><img src="assets/comaskeys-old.jpg" alt="Comaskey Spanish Properties — web antigua, plantilla genérica" loading="lazy" width="1280" height="802"></picture></div>
+          <div class="cortina-despues"><video data-src="assets/comaskeys-new.mp4" data-poster="assets/comaskeys-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1280" height="802" aria-label="Comaskeys — rediseño con hero animado"></video></div>
+          <div class="cortina-linea" aria-hidden="true"></div>
+          <span class="cortina-tag cortina-tag-a">Antes</span><span class="cortina-tag cortina-tag-b">Después</span>
+        </div>
+        <p class="cortina-pie"><span class="a">Antes — plantilla genérica</span><span class="b">Después — rediseño VZ, en producción</span></p>
       </div>
       <div class="case rv rv2">
         <span class="tag case-t">luxuryoverseashomes.com — inmobiliaria internacional</span>
-        <figure class="plate">
-          <div class="frame"><picture><source srcset="assets/luxury-old.webp" type="image/webp"><img src="assets/luxury-old.jpg" alt="Luxury Overseas Homes — web antigua con plantilla genérica" loading="lazy" width="1400" height="736"></picture></div>
-          <figcaption><span class="a">Antes — plantilla genérica</span></figcaption>
-        </figure>
-        <figure class="plate">
-          <div class="frame"><video data-src="assets/luxury-new.mp4" data-poster="assets/luxury-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1280" height="694" aria-label="Luxury Overseas Homes — recorrido por el rediseño"></video></div>
-          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
-        </figure>
+        <div class="cortina" data-cortina>
+          <div class="cortina-antes"><picture><source srcset="assets/luxury-old.webp" type="image/webp"><img src="assets/luxury-old.jpg" alt="Luxury Overseas Homes — web antigua con plantilla genérica" loading="lazy" width="1400" height="736"></picture></div>
+          <div class="cortina-despues"><video data-src="assets/luxury-new.mp4" data-poster="assets/luxury-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1280" height="694" aria-label="Luxury Overseas Homes — recorrido por el rediseño"></video></div>
+          <div class="cortina-linea" aria-hidden="true"></div>
+          <span class="cortina-tag cortina-tag-a">Antes</span><span class="cortina-tag cortina-tag-b">Después</span>
+        </div>
+        <p class="cortina-pie"><span class="a">Antes — plantilla genérica</span><span class="b">Después — rediseño VZ, en producción</span></p>
       </div>
       <div class="case wide rv">
         <span class="tag case-t">aionmkt.com — marketing e IA</span>
-        <figure class="plate">
-          <div class="frame"><picture><source srcset="assets/aion-old.webp" type="image/webp"><img src="assets/aion-old.jpg" alt="AION Marketing — versión anterior de la web" loading="lazy" width="1200" height="716"></picture></div>
-          <figcaption><span class="a">Antes — versión anterior</span></figcaption>
-        </figure>
-        <figure class="plate">
-          <div class="frame"><video data-src="assets/aion-new.mp4" data-poster="assets/aion-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1152" height="648" aria-label="AION Marketing — recorrido por el rediseño"></video></div>
-          <figcaption><span class="b">Después — rediseño VZ, en producción</span></figcaption>
-        </figure>
+        <div class="cortina" data-cortina>
+          <div class="cortina-antes"><picture><source srcset="assets/aion-old.webp" type="image/webp"><img src="assets/aion-old.jpg" alt="AION Marketing — versión anterior de la web" loading="lazy" width="1200" height="716"></picture></div>
+          <div class="cortina-despues"><video data-src="assets/aion-new.mp4" data-poster="assets/aion-new-poster.jpg" preload="none" autoplay muted loop playsinline width="1152" height="648" aria-label="AION Marketing — recorrido por el rediseño"></video></div>
+          <div class="cortina-linea" aria-hidden="true"></div>
+          <span class="cortina-tag cortina-tag-a">Antes</span><span class="cortina-tag cortina-tag-b">Después</span>
+        </div>
+        <p class="cortina-pie"><span class="a">Antes — versión anterior</span><span class="b">Después — rediseño VZ, en producción</span></p>
       </div>
     </div>
   </div>
@@ -292,7 +354,7 @@
   </div>
 </section>
 
-<section class="svc" id="servicios" data-bg="humo" data-ink="claro">
+<section class="svc" id="servicios" data-bg="humo" data-ink="claro" data-hoja>
   <div class="wrap">
     <div class="shead rv">
       <span class="tag">Servicios</span>
@@ -308,7 +370,7 @@
   </div>
 </section>
 
-<section class="incl" id="incluido" data-bg="crema" data-ink="oscuro">
+<section class="incl" id="incluido" data-bg="crema" data-ink="oscuro" data-hoja>
   <div class="wrap">
     <div class="shead rv">
       <span class="tag">Incluido</span>
@@ -337,7 +399,7 @@
   </div>
 </section>
 
-<section class="about" id="sobre" data-bg="gr" data-ink="claro">
+<section class="about" id="sobre" data-bg="gr" data-ink="claro" data-hoja>
   <div class="wrap">
     <div class="shead rv">
       <span class="tag">Estudio</span>
@@ -362,12 +424,12 @@
   </div>
 </section>
 
-<section class="contact" id="contacto" data-bg="crema" data-ink="oscuro">
+<section class="contact" id="contacto" data-bg="crema" data-ink="oscuro" data-hoja>
   <div class="wrap">
     <span class="tag rv">Contacto</span>
     <h2 class="rv">¿Construimos algo que <span class="hl">valga la pena?</span></h2>
     <div class="clinks rv rv2">
-      <a class="btn btn-solid" href="mailto:vladysn8n@gmail.com">vladysn8n@gmail.com</a>
+      <a class="btn btn-solid" href="mailto:vladys@vzstudio.dev">vladys@vzstudio.dev</a>
       <a class="btn btn-ghost" href="https://wa.me/34722736832" target="_blank" rel="noopener">WhatsApp</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/vzstudio" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="https://instagram.com/donvladys" target="_blank" rel="noopener">Instagram</a>
@@ -387,7 +449,7 @@
     <div>
       <span class="fh">Contacto</span>
       <ul>
-        <li><a href="mailto:vladysn8n@gmail.com">vladysn8n@gmail.com</a></li>
+        <li><a href="mailto:vladys@vzstudio.dev">vladys@vzstudio.dev</a></li>
         <li><a href="https://wa.me/34722736832" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="https://www.linkedin.com/in/vzstudio" target="_blank" rel="noopener">LinkedIn</a></li>
         <li><a href="https://instagram.com/donvladys" target="_blank" rel="noopener">Instagram</a></li>
