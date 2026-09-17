@@ -176,17 +176,6 @@ html.hero-movil #vz,html.hero-movil #vz-src{display:none}
 .hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
 .hero .meta{margin-top:28px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
 
-/* ruta móvil sin WebGL: vídeo real recortado con una máscara SVG del texto "VZ" */
-.vz-movil{display:none;position:absolute;inset:0;z-index:0}
-.vz-movil-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vz-movil-mask{position:absolute;inset:0;width:100%;height:100%}
-html.hero-movil .vz-movil{display:block}
-html.hero-movil #vz,html.hero-movil #vz-src{display:none}
-@media(prefers-reduced-motion:no-preference){
-  .vz-movil-video{animation:vzRespira 6s ease-in-out infinite alternate}
-}
-@keyframes vzRespira{from{transform:scale(1)}to{transform:scale(1.04)}}
-
 .hero-estado{
   position:absolute;right:var(--pad);bottom:9vh;z-index:2;
   display:flex;align-items:center;gap:8px;
