@@ -8,6 +8,8 @@
 import { escapar } from './marcado.js';
 
 const SITIO = 'https://vzstudio.dev';
+// Sube este valor cuando cambien css/ o js/: el navegador los cachea 24 h.
+export const VERSION = '20260919a';
 
 /** Cabecera común: nav coherente con el de la home. */
 function nav(raiz) {
@@ -147,7 +149,7 @@ export function paginaContenido(p) {
 <link rel="icon" href="${raiz}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${raiz}fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${raiz}fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${raiz}css/style.css">
+<link rel="stylesheet" href="${raiz}css/style.css?v=${VERSION}">
 <script type="application/ld+json">
 ${jsonLdSeguro(jsonLd)}
 </script>
@@ -238,7 +240,7 @@ export function paginaIndice(p) {
 <link rel="icon" href="${raiz}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${raiz}fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${raiz}fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${raiz}css/style.css">
+<link rel="stylesheet" href="${raiz}css/style.css?v=${VERSION}">
 <script type="application/ld+json">
 ${jsonLdSeguro(jsonLd)}
 </script>
@@ -354,7 +356,7 @@ export function paginaDiagnostico() {
 <link rel="icon" href="${raiz}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${raiz}fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${raiz}fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${raiz}css/style.css">
+<link rel="stylesheet" href="${raiz}css/style.css?v=${VERSION}">
 <script type="application/ld+json">
 ${jsonLdSeguro(jsonLd)}
 </script>
@@ -383,7 +385,7 @@ ${nav(raiz)}
 
 ${pie(raiz)}
 
-<script type="module" src="${raiz}js/fx/diagnostico.js"></script>
+<script type="module" src="${raiz}js/fx/diagnostico.js?v=${VERSION}"></script>
 </body>
 </html>`;
 }

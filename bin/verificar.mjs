@@ -81,7 +81,7 @@ async function revisarEnlaces(nombre, html, dirPagina) {
   const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
   for (const h of hrefs) {
     if (/^(https?:|mailto:|tel:|#|\/)/.test(h)) continue;
-    const limpio = h.split('#')[0];
+    const limpio = h.split('#')[0].split('?')[0]; // ?v= es versionado de caché, no ruta
     if (!limpio) continue;
     const destino = limpio.endsWith('/') ? join(dirPagina, limpio, 'index.html') : join(dirPagina, limpio);
     if (!(await existe(destino))) fallo(nombre, `enlace roto → ${h}`);

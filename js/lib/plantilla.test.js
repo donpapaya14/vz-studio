@@ -194,7 +194,7 @@ describe('paginaDiagnostico', () => {
 
   it('carga su módulo como script externo, nunca en línea', () => {
     const html = paginaDiagnostico();
-    expect(html).toContain('src="../js/fx/diagnostico.js"');
+    expect(html).toMatch(/src="\.\.\/js\/fx\/diagnostico\.js\?v=[0-9a-z]+"/);
     const scripts = html.match(/<script[^>]*>/g) || [];
     expect(scripts.every((s) => /\ssrc=/.test(s) || /ld\+json/.test(s))).toBe(true);
   });

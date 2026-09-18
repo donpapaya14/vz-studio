@@ -7,6 +7,7 @@ import { montarScrub } from './fx/scrub.js';
 import { montarRail } from './fx/rail.js';
 import { montarRevelados } from './fx/revelar.js';
 import { montarMagnetico } from './fx/magnetico.js';
+import { montarCortinas, fijarCortinas } from './fx/cortina.js';
 
 const { gsap, ScrollTrigger, SplitText, Flip, Lenis } = window;
 
@@ -77,6 +78,7 @@ mm.add(
           ultima.dataset.ink === 'oscuro' ? '#16140F' : '#ECEEF2'
         );
       }
+      fijarCortinas();
       return;
     }
 
@@ -91,5 +93,6 @@ mm.add(
     montarRevelados();
     montarMagnetico('.hero .btn-solid');
     montarMagnetico('.contact .btn-solid');
+    montarCortinas();
   }
 );
