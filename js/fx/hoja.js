@@ -29,7 +29,7 @@ export function montarHoja() {
     if (!siguiente || siguiente.tagName !== 'SECTION') return; // última sección: nadie la tapa
     window.gsap.to(sec, {
       scale: 0.96,
-      filter: 'brightness(.55)',
+      filter: 'brightness(.72)',
       ease: 'none',
       scrollTrigger: {
         trigger: siguiente,

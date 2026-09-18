@@ -50,6 +50,14 @@ function pie(raiz) {
         <li><a href="${raiz}diagnostico/">Diagnóstico</a></li>
       </ul>
     </div>
+    <div>
+      <span class="fh">Legal</span>
+      <ul>
+        <li><a href="${raiz}aviso-legal.html">Aviso legal</a></li>
+        <li><a href="${raiz}privacidad.html">Privacidad</a></li>
+        <li><a href="${raiz}cookies.html">Cookies</a></li>
+      </ul>
+    </div>
   </div>
   <div class="legalrow"><span>© 2026 VZ Studio · Vladys Z.</span><span>Murcia / Alicante, España</span></div>
 </footer>`;
