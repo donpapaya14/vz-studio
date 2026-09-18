@@ -16,10 +16,10 @@ function montarSplitTitulares() {
       onSplit(self) {
         return window.gsap.from(self.lines, {
           yPercent: 110,
-          duration: 0.7,
-          stagger: 0.06,
+          duration: 0.9,
+          stagger: 0.08,
           ease: 'power3.out',
-          scrollTrigger: { trigger: h2, start: 'top 96%', once: true },
+          scrollTrigger: { trigger: h2, start: 'top 85%', once: true },
         });
       },
     });
@@ -28,11 +28,8 @@ function montarSplitTitulares() {
 
 /** Revela en lote los .rv y anima el contador de los que llevan data-hasta. */
 function montarLoteRevelados() {
-  // 'top bottom' y no 'top 92%': con el efecto hoja la sección entra tapando a
-  // la anterior y, si el visitante baja rápido, llegaba con el contenido aún a
-  // opacidad 0 encima de una sección oscurecida = pantalla vacía.
   window.ScrollTrigger.batch('.rv', {
-    start: 'top bottom',
+    start: 'top 92%',
     once: true,
     onEnter(lote) {
       lote.forEach((el) => {

@@ -75,14 +75,6 @@ section[data-bg="verde"]{background:var(--verde)}
 section[data-bg]{position:relative}
 section[data-ink="oscuro"] .hl{color:#4E6B00}
 
-/* ---------- efecto "hoja": la sección siguiente sube y tapa a la actual ---------- */
-/* top real lo calcula js/fx/hoja.js (más alta que el viewport → se queda pegada por abajo) */
-section[data-hoja]{position:sticky;top:0;will-change:transform;transform-origin:center top}
-main > section:not(:first-child){border-radius:28px 28px 0 0;box-shadow:0 -18px 60px rgba(0,0,0,.35)}
-@media(prefers-reduced-motion:reduce){
-  section[data-hoja]{position:relative}
-}
-
 /* ---------- texto utilitario ---------- */
 .tag{
   display:block;font-family:var(--mono);font-size:12.5px;font-weight:500;
@@ -284,32 +276,16 @@ html.sin-webgl .vz-static{display:block}
 @media(max-width:860px){.cases{grid-template-columns:1fr;gap:48px}}
 .case{display:flex;flex-direction:column;gap:18px}
 .case .case-t{padding-bottom:4px}
-/* caso impar: el escenario de cortina ocupa las dos columnas */
+/* caso impar: ocupa las dos columnas y pone antes/después en paralelo */
 @media(min-width:861px){
   .case.wide{display:grid;grid-column:1/-1;grid-template-columns:1fr 1fr;gap:18px clamp(26px,4vw,48px);align-items:start}
-  .case.wide .case-t,.case.wide .cortina,.case.wide .cortina-pie{grid-column:1/-1}
+  .case.wide .case-t{grid-column:1/-1}
 }
 
-/* cortina antes/después: un solo escenario, el después se revela con clip-path */
-.cortina{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line2);background:#1B1E24;border-radius:4px;cursor:ew-resize;touch-action:pan-y}
-.cortina-antes,.cortina-despues{position:absolute;inset:0}
-.cortina-antes img,.cortina-antes video,.cortina-despues img,.cortina-despues video{width:100%;height:100%;object-fit:cover;object-position:top center}
-.cortina-despues{clip-path:inset(0 0 0 var(--corte,50%))}
-.cortina-linea{position:absolute;top:0;bottom:0;left:var(--corte,50%);width:2px;background:var(--verde);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
-.cortina-tag{
-  position:absolute;bottom:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
-  padding:6px 10px;background:rgba(10,11,14,.75);color:#ECEEF2;
-}
-.cortina-tag-a{left:12px}
-.cortina-tag-b{right:12px;color:var(--verde)}
-.cortina-pie{
-  display:flex;justify-content:space-between;gap:12px;
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);
-}
-.cortina-pie .a{color:var(--ink2)}
-.cortina-pie .b{color:var(--verde)}
-section[data-bg="crema"] .cortina-pie .b{color:var(--tinta);font-weight:600}
 
+/* láminas uniformes: mismo tamaño antes/después en ambos casos */
+.case .plate .frame{aspect-ratio:16/9}
+.case .plate .frame img,.case .plate .frame video{width:100%;height:100%;object-fit:cover;object-position:top center}
 .plate{margin:0;position:relative}
 .plate .frame{border:1px solid var(--line2);background:#1B1E24;overflow:hidden;border-radius:4px}
 .plate .frame img,.plate .frame video{width:100%;height:auto}
@@ -488,10 +464,10 @@ section[data-bg="crema"] .plate figcaption .b{color:var(--tinta);font-weight:600
 
 /* ---------- revelados ---------- */
 .rv{opacity:0;transform:translateY(18px)}
-.rv.in{opacity:1;transform:none;transition:opacity .45s,transform .45s}
-.rv2{transition-delay:.06s}
-.rv3{transition-delay:.12s}
-.rv4{transition-delay:.18s}
+.rv.in{opacity:1;transform:none;transition:opacity .7s,transform .7s}
+.rv2{transition-delay:.08s}
+.rv3{transition-delay:.16s}
+.rv4{transition-delay:.24s}
 /* máscara de línea para SplitText (mask:'lines'): la crea GSAP en tiempo de
    ejecución con la clase linesClass:'linea' */
 .linea{overflow:hidden;padding:.06em 0 .1em;margin:-.06em 0 -.1em}
@@ -522,7 +498,7 @@ section[data-bg="crema"] .plate figcaption .b{color:var(--tinta);font-weight:600
 /* ============================================================
    páginas de contenido: casos, guías y diagnóstico
    Reutilizan los tokens y las clases de la home (.wrap, .tag, .btn).
-   body.doc = página de documento: fondo fijo, sin efecto hoja.
+   body.doc = página de documento: fondo fijo.
    ============================================================ */
 body.doc{background:var(--gr);color:var(--ink)}
 body.doc main{padding-top:104px}
