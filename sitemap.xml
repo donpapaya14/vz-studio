@@ -15,6 +15,10 @@
     <changefreq>monthly</changefreq><priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vzstudio.dev/casos/gym-evolution-beniel/</loc>
+    <changefreq>yearly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://vzstudio.dev/casos/aion-marketing/</loc>
     <changefreq>yearly</changefreq><priority>0.6</priority>
   </url>
